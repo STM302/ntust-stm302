@@ -99,7 +99,6 @@
         if (next >= paths.length) return;
         const url = new URL(original);
         url.pathname = paths[next++];
-        url.searchParams.set('imgv', String(Date.now()));
         image.src = url.href;
       };
       image.addEventListener('error', tryNext);
