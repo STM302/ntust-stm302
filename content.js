@@ -127,7 +127,6 @@
     return [url.pathname,...extensions.map(ext=>`${stem}.${ext}`)].filter((v,i,all)=>all.indexOf(v)===i).map(p=>{
       const candidate=new URL(url); candidate.pathname=p;
       if (candidate.protocol === 'file:') candidate.search='';
-      else candidate.searchParams.set('imgv',String(Date.now()));
       return candidate.href;
     });
   }
