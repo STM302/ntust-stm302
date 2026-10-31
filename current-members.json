@@ -1,0 +1,88 @@
+{
+  "group_order": [
+    "研究室人員",
+    "博班",
+    "碩二",
+    "碩一"
+  ],
+  "members": [
+      {
+      "name": "Rita",
+      "group": "博班",
+      "photo": "assets/temporary-xd.png",
+      "motto": ""
+    },
+    {
+      "name": "Iroh",
+      "group": "博班",
+      "photo": "assets/temporary-xd.png",
+      "motto": ""
+    },
+    {
+      "name": "Ibnu",
+      "group": "博班",
+      "photo": "assets/ibnu.jpg",
+      "motto": "Keep learning, keep growing, and stay humble."
+    },
+    {
+      "name": "LuLu",
+      "group": "碩二",
+      "photo": "assets/temporary-xd.png",
+      "motto": ""
+    },
+    {
+      "name": "Jack",
+      "group": "碩二",
+      "photo": "assets/temporary-xd.png",
+      "motto": ""
+    },
+    {
+      "name": "Clair",
+      "group": "碩二",
+      "photo": "assets/clair.jpg",
+      "motto": ""
+    },
+    {
+      "name": "Gary",
+      "group": "碩二",
+      "photo": "assets/gary.jpg",
+      "motto": ""
+    },
+    {
+      "name": "Aden",
+      "group": "碩一",
+      "photo": "assets/aden.jpg",
+      "motto": ""
+    },
+    {
+      "name": "Lenny",
+      "group": "碩一",
+      "photo": "assets/temporary-xd.png",
+      "motto": ""
+    },
+    {
+      "name": "Marklei",
+      "group": "碩一",
+      "photo": "assets/marklei.png",
+      "motto": ""
+    },
+    {
+      "name": "Janet",
+      "group": "研究室人員",
+      "photo": "assets/janet.jpg",
+      "motto": ""
+    },
+    {
+      "name": "Din",
+      "group": "研究室人員",
+      "photo": "assets/temporary-xd.png",
+      "motto": ""
+    },
+    {
+      "name": "姚博",
+      "group": "研究室人員",
+      "photo": "assets/temporary-xd.png",
+      "motto": ""
+    }
+  ]
+}

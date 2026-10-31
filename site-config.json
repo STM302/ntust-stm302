@@ -1,0 +1,16 @@
+{
+  "sources": {
+    "alumni-members": {
+      "csv_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGfgU_Legm4RV15cBSI_fFYdbrsxm7eWQ_7YI5wuX5Hb3LnPUSwYgcaJfbdWes9iJtyyeE1TrAetzf/pub?gid=0&single=true&output=csv"
+    },
+    "publications": {
+      "csv_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGfgU_Legm4RV15cBSI_fFYdbrsxm7eWQ_7YI5wuX5Hb3LnPUSwYgcaJfbdWes9iJtyyeE1TrAetzf/pub?gid=2141140541&single=true&output=csv"
+    },
+    "news-media": {
+      "csv_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGfgU_Legm4RV15cBSI_fFYdbrsxm7eWQ_7YI5wuX5Hb3LnPUSwYgcaJfbdWes9iJtyyeE1TrAetzf/pub?gid=2036536587&single=true&output=csv"
+    },
+    "news-perspectives": {
+      "csv_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGfgU_Legm4RV15cBSI_fFYdbrsxm7eWQ_7YI5wuX5Hb3LnPUSwYgcaJfbdWes9iJtyyeE1TrAetzf/pub?gid=2028868110&single=true&output=csv"
+    }
+  }
+}

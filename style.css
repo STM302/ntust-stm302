@@ -1,0 +1,2714 @@
+/* STM302：保守整理版。保留原選擇器、條件規則順序與所有不同值的覆寫設定。 */
+
+:root {
+  --blue: #0756a3;
+  --deep: #063b73;
+  --green: #138164;
+  --ink: #172b42;
+  --muted: #5c7086;
+  --line: #dce7f1;
+  --soft: #f3f8fc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 16px;
+}
+
+body {
+  margin: 0;
+  background: white;
+  color: var(--ink);
+  font-family: "Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif;
+  line-height: 1.8;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+h1,h2,h3,p {
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 32px;
+  line-height: 1.45;
+  margin-bottom: 22px;
+  font-weight: 700;
+}
+
+p {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+a:focus-visible,button:focus-visible,summary:focus-visible {
+  outline: 3px solid #e7aa38;
+  outline-offset: 5px;
+}
+
+.wrap {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 32px;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 15px;
+  background: white;
+  padding: 10px;
+  z-index: 50;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+.topbar {
+  background: var(--deep);
+  color: #d2e5f4;
+  font-size: 10px;
+  letter-spacing: .13em;
+  padding: 8px 0;
+}
+
+.topbar .wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.site-header {
+  position: relative;
+  top: auto;
+  background: rgba(255,255,255,.97);
+  border-bottom: 1px solid var(--line);
+  z-index: 10;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  min-height: 92px;
+}
+
+.school-brand {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  flex-shrink: 0;
+}
+
+.school-brand img {
+  width: 255px;
+  height: auto;
+  display: block;
+}
+
+.department {
+  border-left: 1px solid var(--line);
+  padding-left: 17px;
+  color: var(--deep);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.department small {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 23px;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.nav-links a {
+  padding: 31px 0;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-links a:hover,.nav-links a[aria-current="page"] {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.menu-toggle {
+  display: none;
+  border: 1px solid var(--line);
+  background: white;
+  padding: 8px 13px;
+  color: var(--blue);
+  border-radius: 4px;
+}
+
+.hero {
+  background: linear-gradient(115deg,#f5faff,#eaf4fd 65%,#edf8f2);
+  padding: 64px 0 60px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 55px;
+  align-items: center;
+}
+
+.eyebrow {
+  color: var(--blue);
+  letter-spacing: .13em;
+  font-size: 11px;
+  font-weight: 700;
+  display: block;
+}
+
+.lab-name {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  margin: 18px 0 10px;
+  color: var(--deep);
+}
+
+.hero h1 {
+  font-size: clamp(32px,3.6vw,46px);
+  line-height: 1.45;
+  letter-spacing: -.025em;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: var(--green);
+}
+
+.hero-description {
+  font-size: 16px;
+  line-height: 1.9;
+  margin-bottom: 26px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--blue);
+  color: white;
+  padding: 11px 21px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 5px;
+  border: 1px solid var(--blue);
+}
+
+.btn:hover {
+  background: var(--deep);
+}
+
+.btn-outline {
+  color: var(--blue);
+  background: white;
+  border-color: #b9d0e6;
+}
+
+.btn-outline:hover {
+  background: #e1edf7;
+}
+
+.hero-panel {
+  position: relative;
+  background: linear-gradient(150deg,#0756a3,#063b73);
+  border-radius: 16px;
+  min-height: 365px;
+  overflow: hidden;
+  color: white;
+  padding: 26px;
+  box-shadow: 0 18px 40px #0b548320;
+}
+
+.panel-kicker {
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: #b4d2e9;
+}
+
+.diagram {
+  position: relative;
+  height: 265px;
+  display: grid;
+  place-items: center;
+}
+
+.orbit {
+  width: 215px;
+  height: 215px;
+  border: 1px solid #77b5d773;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.orbit:before {
+  content: "";
+  position: absolute;
+  inset: 26px;
+  border: 1px solid #b7e2d773;
+  border-radius: 50%;
+}
+
+.orbit span {
+  background: #ffffff10;
+  border: 1px solid #ffffff25;
+  border-radius: 50%;
+  width: 110px;
+  height: 110px;
+  display: grid;
+  place-items: center;
+  font-size: 33px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: #e1f5ea;
+}
+
+.orbit-label {
+  position: absolute;
+  background: #0b548e;
+  color: #d3e7f6;
+  border: 1px solid #78afcc;
+  font-size: 11px;
+  border-radius: 30px;
+  padding: 5px 14px;
+}
+
+.label-one {
+  top: 21px;
+  left: 46%;
+}
+
+.label-two {
+  bottom: 42px;
+  left: 10%;
+}
+
+.label-three {
+  bottom: 42px;
+  right: 10%;
+}
+
+.panel-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid #ffffff25;
+  padding-top: 15px;
+}
+
+.panel-bottom strong {
+  letter-spacing: .13em;
+  font-size: 18px;
+}
+
+.panel-bottom span {
+  font-size: 11px;
+  color: #c1dcec;
+}
+
+.section {
+  padding: 72px 0;
+}
+
+.section-soft {
+  background: var(--soft);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: .8fr 1.4fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.portrait {
+  background: linear-gradient(140deg,#0c5297,#16806e);
+  color: white;
+  padding: 26px;
+  border-radius: 12px;
+  min-height: 355px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.portrait>span {
+  font-size: 10px;
+  letter-spacing: .18em;
+  color: #d6e7f2;
+}
+
+.portrait-initial {
+  font-size: 77px;
+  font-family: serif;
+  align-self: center;
+  color: #ffffff68;
+}
+
+.portrait h2 {
+  font-size: 27px;
+  margin-bottom: 0;
+}
+
+.portrait p {
+  color: #dae8ee;
+  margin-bottom: 3px;
+  font-size: 13px;
+}
+
+.portrait small {
+  font-size: 10px;
+  color: #c6dce2;
+}
+
+.profile-copy h2 {
+  margin: 15px 0 18px;
+}
+
+.lead {
+  font-size: 18px;
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+.scholar-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 22px 0;
+}
+
+.scholar-links a {
+  padding: 7px 11px;
+  color: var(--blue);
+  border: 1px solid #c6d9e9;
+  border-radius: 4px;
+  font-size: 11px;
+  background: white;
+}
+
+.scholar-links a:hover {
+  background: #eef6fd;
+}
+
+.profile-details {
+  margin-top: 20px;
+}
+
+details {
+  border-top: 1px solid var(--line);
+  padding: 12px 0;
+}
+
+summary {
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--deep);
+  font-weight: 600;
+}
+
+details p {
+  font-size: 12px;
+  margin: 12px 0 0;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+}
+
+.about-grid h2 {
+  margin: 14px 0;
+}
+
+.big-lab {
+  font-size: 54px;
+  font-weight: 700;
+  color: #d0e0ee;
+  letter-spacing: .04em;
+}
+
+.note {
+  font-size: 12px;
+  color: var(--muted);
+  border-left: 3px solid #9dbbb1;
+  padding: 4px 0 4px 13px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 23px;
+}
+
+.tags span {
+  font-size: 12px;
+  color: var(--blue);
+  background: #e3eef7;
+  border-radius: 30px;
+  padding: 5px 14px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 32px;
+  margin-bottom: 30px;
+}
+
+.section-heading h2 {
+  margin: 12px 0 0;
+}
+
+.section-heading p {
+  font-size: 12px;
+  margin: 0;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 18px;
+}
+
+.service-grid article,.research-card {
+  border: 1px solid var(--line);
+  padding: 24px;
+  border-radius: 7px;
+  border-top: 3px solid var(--green);
+  background: white;
+}
+
+.service-number {
+  font-size: 27px;
+  color: #9ebacb;
+  font-weight: 600;
+}
+
+.service-grid h3 {
+  font-size: 17px;
+  margin: 12px 0;
+}
+
+.service-grid p {
+  font-size: 13px;
+  margin: 0;
+}
+
+footer {
+  background: var(--deep);
+  color: #dbe8f3;
+  padding: 48px 0 0;
+}
+
+footer h2 {
+  color: white;
+  font-size: 27px;
+  margin: 12px 0;
+}
+
+footer .eyebrow {
+  color: #99c8e8;
+}
+
+footer p {
+  font-size: 13px;
+  color: #bdcfe1;
+  margin: 3px 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.contact-grid dl {
+  margin: 0;
+}
+
+.contact-grid dl div {
+  display: grid;
+  grid-template-columns: 105px 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ffffff18;
+  font-size: 12px;
+}
+
+.contact-grid dt {
+  color: #91b5d4;
+}
+
+.contact-grid dd {
+  margin: 0;
+  color: #dbe8f3;
+}
+
+.footer-bottom {
+  margin-top: 35px;
+  padding-top: 19px;
+  padding-bottom: 19px;
+  border-top: 1px solid #ffffff20;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 10px;
+  color: #9cbbd6;
+}
+
+.page-hero {
+  background: var(--soft);
+  padding: 32px 0 44px;
+  border-bottom: 1px solid var(--line);
+}
+
+.breadcrumb {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 25px;
+}
+
+.breadcrumb a {
+  color: var(--blue);
+}
+
+.page-hero h1 {
+  font-size: 38px;
+  margin: 9px 0;
+}
+
+.page-hero p {
+  margin-bottom: 0;
+}
+
+.news-list {
+  margin-top: 32px;
+}
+
+.news-list article {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 30px;
+  border-top: 1px solid var(--line);
+  padding: 27px 0;
+}
+
+.news-list time {
+  color: var(--blue);
+  font-size: 13px;
+}
+
+.category {
+  display: inline-block;
+  background: #eaf4fc;
+  color: var(--blue);
+  padding: 3px 9px;
+  border-radius: 3px;
+  font-size: 10px;
+}
+
+.news-list h2 {
+  font-size: 21px;
+  margin: 10px 0;
+}
+
+.news-list p {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.research-card h2 {
+  font-size: 22px;
+  margin: 15px 0;
+}
+
+.research-card p {
+  font-size: 14px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.feature-card {
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--soft);
+}
+
+.feature-card h2 {
+  font-size: 25px;
+  margin: 14px 0;
+}
+
+.advisor-member {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 36px;
+}
+
+.member-initial {
+  width: 110px;
+  height: 125px;
+  border-radius: 8px;
+  background: #e0edf6;
+  display: grid;
+  place-items: center;
+  font-size: 44px;
+  color: var(--blue);
+  font-family: serif;
+}
+
+.advisor-member h2 {
+  font-size: 26px;
+  margin: 10px 0;
+}
+
+.advisor-member p {
+  margin-bottom: 12px;
+}
+
+.text-link {
+  font-size: 13px;
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.member-groups {
+  margin-top: 35px;
+}
+
+@media (max-width:1100px) {
+  .school-brand img {
+    width: 220px;
+  }
+
+  .department {
+    font-size: 12px;
+    padding-left: 12px;
+  }
+
+  .school-brand {
+    gap: 12px;
+  }
+
+  .nav-links {
+    gap: 17px;
+    font-size: 12px;
+  }
+
+  .hero-grid {
+    gap: 35px;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+@media (max-width:950px) {
+  .menu-toggle {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 92px;
+    background: white;
+    border-bottom: 1px solid var(--line);
+    padding: 13px 32px;
+    gap: 0;
+  }
+
+  .nav-links.open {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+  }
+
+  .nav-links a {
+    padding: 10px 0;
+  }
+
+  .hero h1 {
+    font-size: 35px;
+  }
+
+  .profile-grid,.about-grid {
+    gap: 35px;
+  }
+
+}
+
+@media (max-width:680px) {
+  .wrap {
+    padding: 0 20px;
+  }
+
+  .topbar {
+    font-size: 8px;
+    letter-spacing: .035em;
+  }
+
+  .nav {
+    min-height: 84px;
+    gap: 10px;
+  }
+
+  .school-brand img {
+    width: 195px;
+  }
+
+  .school-brand {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .department {
+    border: none;
+    padding: 0;
+    font-size: 10px;
+  }
+
+  .department small {
+    display: inline;
+    font-size: 9px;
+    margin-left: 10px;
+  }
+
+  .menu-toggle {
+    padding: 7px 9px;
+    font-size: 12px;
+  }
+
+  .nav-links {
+    top: 84px;
+    padding: 12px 20px;
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .hero {
+    padding: 37px 0;
+  }
+
+  .hero-grid,.profile-grid,.about-grid,.results-grid,.contact-grid,.research-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+  }
+
+  .hero-panel {
+    min-height: 330px;
+    padding: 22px;
+  }
+
+  .diagram {
+    height: 230px;
+  }
+
+  .orbit {
+    width: 185px;
+    height: 185px;
+  }
+
+  .hero-panel .label-one {
+    top: 10px;
+  }
+
+  .label-two,.label-three {
+    bottom: 28px;
+  }
+
+  .section {
+    padding: 46px 0;
+  }
+
+  h2 {
+    font-size: 27px;
+  }
+
+  .portrait {
+    min-height: 285px;
+    max-width: 400px;
+  }
+
+  .profile-copy h2 {
+    font-size: 29px;
+  }
+
+  .lead {
+    font-size: 16px;
+  }
+
+  .big-lab {
+    font-size: 40px;
+  }
+
+  .section-heading {
+    display: block;
+  }
+
+  .section-heading p {
+    margin-top: 15px;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .service-grid article {
+    padding: 20px;
+  }
+
+  .service-grid h3 {
+    margin: 6px 0;
+  }
+
+  .news-list article {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .page-hero {
+    padding: 25px 0 32px;
+  }
+
+  .page-hero h1 {
+    font-size: 30px;
+  }
+
+  .feature-card {
+    padding: 24px;
+  }
+
+  .advisor-member {
+    gap: 20px;
+  }
+
+  .advisor-member h2 {
+    font-size: 23px;
+  }
+
+  .member-initial {
+    width: 80px;
+    height: 105px;
+    flex-shrink: 0;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  footer {
+    padding-top: 35px;
+  }
+
+  .contact-grid {
+    gap: 20px;
+  }
+
+  .contact-grid dl div {
+    grid-template-columns: 90px 1fr;
+  }
+
+}
+
+@media (prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+}
+
+/* 2026-10-05：主次標題、圖片底圖、直接展開履歷。 */
+
+.nav {
+  gap: 16px;
+}
+
+.nav-links {
+  gap: 12px;
+  font-size: 18px;
+}
+
+.nav-links a {
+  padding: 24px 2px;
+}
+
+.school-brand {
+  gap: 12px;
+}
+
+.school-brand img {
+  width: 230px;
+}
+
+.department {
+  padding-left: 12px;
+}
+
+.department small {
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+  background: #1b2733;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 52%;
+  z-index: -2;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,rgba(4,16,29,.43),rgba(4,16,29,.57));
+  z-index: -1;
+}
+
+.hero-centered {
+  width: 100%;
+  text-align: center;
+}
+
+.hero h1 {
+  color: #fff;
+  font-size: clamp(34px,4.6vw,58px);
+  line-height: 1.5;
+  margin: 0 0 18px;
+  letter-spacing: .04em;
+  text-shadow: 0 2px 12px #0008;
+}
+
+.hero-subtitle {
+  color: #fff;
+  font-size: clamp(17px,2vw,24px);
+  line-height: 1.7;
+  margin: 0;
+  font-weight: 500;
+  text-shadow: 0 2px 8px #000a;
+}
+
+.profile-grid {
+  align-items: start;
+}
+
+.profile-copy .advisor-heading {
+  font-size: 30px;
+  color: var(--blue);
+  margin: 0 0 12px;
+  letter-spacing: .02em;
+}
+
+.advisor-subtitle {
+  font-size: 21px;
+  color: var(--ink);
+  margin: 0 0 20px;
+  font-weight: 500;
+}
+
+.static-profile {
+  margin-top: 25px;
+}
+
+.profile-block {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.profile-block h3 {
+  font-size: 20px;
+  margin: 0 0 12px;
+  color: var(--deep);
+}
+
+.profile-block ul {
+  margin: 0;
+  padding-left: 22px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.profile-block li {
+  margin-bottom: 7px;
+  line-height: 1.9;
+}
+
+.profile-block p {
+  margin-bottom: 12px;
+  line-height: 1.9;
+}
+
+.profile-block p:last-child {
+  margin-bottom: 0;
+}
+
+.academic-access {
+  margin-top: 18px;
+}
+
+.academic-access>p {
+  font-size: 14px;
+}
+
+.academic-access .scholar-links {
+  margin: 12px 0 0;
+}
+
+.academic-access .scholar-links a {
+  font-size: 13px;
+}
+
+@media (max-width:1100px) {
+  .nav-links {
+    font-size: 17px;
+    gap: 9px;
+  }
+
+  .department small {
+    font-size: 14px;
+  }
+
+  .school-brand img {
+    width: 215px;
+  }
+
+}
+
+@media (max-width:950px) {
+  .nav-links {
+    font-size: 18px;
+    padding: 14px 24px;
+  }
+
+  .nav-links a {
+    padding: 12px 0;
+  }
+
+  .nav {
+    gap: 12px;
+  }
+
+}
+
+@media (max-width:680px) {
+  .hero {
+    min-height: 360px;
+    padding: 72px 0;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+    letter-spacing: .01em;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+  .school-brand img {
+    width: 185px;
+  }
+
+  .department {
+    font-size: 12px;
+    padding-left: 0;
+  }
+
+  .department small {
+    display: block;
+    font-size: 14px;
+    margin: 3px 0 0;
+  }
+
+  .nav {
+    min-height: 106px;
+  }
+
+  .nav-links {
+    top: 106px;
+    font-size: 17px;
+  }
+
+  .profile-copy .advisor-heading {
+    font-size: 27px;
+  }
+
+  .advisor-subtitle {
+    font-size: 18px;
+  }
+
+  .profile-block h3 {
+    font-size: 19px;
+  }
+
+  .profile-block ul {
+    font-size: 14px;
+  }
+
+}
+
+@media (max-width:950px) {
+  html:not(.has-js) .nav {
+    flex-wrap: wrap;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  html:not(.has-js) .menu-toggle {
+    display: none;
+  }
+
+  html:not(.has-js) .nav-links {
+    display: flex;
+    position: static;
+    flex-wrap: wrap;
+    padding: 0;
+    gap: 10px 20px;
+    border: 0;
+  }
+
+  html:not(.has-js) .nav-links a {
+    padding: 7px 0;
+  }
+
+}
+
+/* 履歷：保留上方照片與學歷，下面以兩欄平衡長度。 */
+
+.profile-columns {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  margin-top: 42px;
+}
+
+.profile-block h3 {
+  font-size: 30px;
+  line-height: 1.45;
+  margin-bottom: 18px;
+}
+
+.profile-block p,.profile-block ul {
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+.profile-block ul {
+  padding-left: 25px;
+}
+
+.profile-block li {
+  margin-bottom: 9px;
+}
+
+.profile-column {
+  min-width: 0;
+}
+
+.profile-column .profile-block {
+  padding: 26px 0;
+}
+
+.field-list {
+  columns: 2;
+  column-gap: 24px;
+}
+
+.field-list li {
+  break-inside: avoid;
+}
+
+.publication-year {
+  border-top: 2px solid var(--blue);
+  padding-top: 28px;
+  margin-top: 38px;
+}
+
+.publication-year h2 {
+  color: var(--blue);
+  font-size: 32px;
+}
+
+.publication-type h3 {
+  font-size: 22px;
+  margin: 25px 0 10px;
+}
+
+.publication-list {
+  padding-left: 26px;
+  margin: 0;
+}
+
+.publication-list li {
+  padding: 16px 8px 18px;
+  border-bottom: 1px solid var(--line);
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+
+.publication-title {
+  display: block;
+  color: var(--ink);
+  font-weight: 650;
+  line-height: 1.65;
+}
+
+.publication-authors,.publication-venue {
+  display: block;
+  font-size: 15px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.publication-source {
+  font-size: 14px;
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.publication-summary {
+  font-size: 18px;
+  color: var(--deep);
+}
+
+.publication-status {
+  padding: 18px 22px;
+  background: var(--soft);
+  border-left: 4px solid var(--blue);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+@media (max-width:680px) {
+  .profile-columns {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 28px;
+  }
+
+  .profile-block h3 {
+    font-size: 27px;
+  }
+
+  .profile-block p,.profile-block ul {
+    font-size: 16px;
+  }
+
+  .field-list {
+    columns: 1;
+  }
+
+  .publication-list li {
+    font-size: 16px;
+  }
+
+}
+
+/* 首頁對齊與研究成果緊湊排版。 */
+
+.profile-columns {
+  width: 100%;
+  margin: 42px auto 0;
+  gap: 52px;
+}
+
+.profile-column {
+  overflow-wrap: anywhere;
+}
+
+.profile-copy .advisor-heading {
+  color: var(--deep);
+}
+
+.profile-block p,.profile-block ul {
+  color: #000;
+}
+
+.field-primary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  list-style: none;
+  margin: 0 0 16px !important;
+  padding: 0 !important;
+  font-weight: 600;
+}
+
+.field-primary li {
+  margin: 0;
+}
+
+.publications-hero {
+  padding: 20px 0;
+  border-bottom: 0;
+}
+
+.publications-hero h1 {
+  font-size: 30px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.publications-hero+.section {
+  padding-top: 24px;
+}
+
+.publication-year {
+  border: 0;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.publication-type {
+  margin: 0 0 30px;
+}
+
+.publication-type .publication-group-heading {
+  font-size: 22px;
+  color: var(--deep);
+  line-height: 1.45;
+  margin: 0 0 12px;
+}
+
+.publication-list li {
+  border: 0;
+  padding: 10px 0 14px;
+}
+
+.publication-title {
+  font-size: 15px;
+  font-weight: 400;
+  color: #686868;
+  line-height: 1.8;
+}
+
+.publication-authors {
+  color: #686868;
+}
+
+.author-kuo {
+  color: #000;
+  font-weight: 700;
+}
+
+.publication-coverage {
+  font-size: 13px;
+  color: #686868;
+  margin: 32px 0 0;
+}
+
+@media (max-width:680px) {
+  .profile-columns {
+    margin-top: 28px;
+    gap: 0;
+  }
+
+  .field-primary {
+    gap: 8px 18px;
+  }
+
+  .publication-title {
+    font-size: 15px;
+  }
+
+  .publication-type .publication-group-heading {
+    font-size: 20px;
+  }
+
+  .publications-hero h1 {
+    font-size: 28px;
+  }
+
+}
+
+.compact-page-hero {
+  padding: 20px 0;
+  border-bottom: 0;
+}
+
+.compact-page-hero h1 {
+  font-size: 30px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.compact-page-hero+.section {
+  padding-top: 24px;
+}
+
+.publication-note {
+  display: block;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #686868;
+  margin-top: 4px;
+}
+
+.contact-grid dd {
+  overflow-wrap: anywhere;
+}
+
+.contact-grid dd a {
+  text-decoration: none;
+}
+
+@media (max-width:680px) {
+  .compact-page-hero h1 {
+    font-size: 28px;
+  }
+
+}
+
+/* 研究領域依順序分為左右兩欄，各五項。 */
+
+.profile-block .research-fields {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  grid-template-rows: repeat(3,auto);
+  grid-auto-flow: column;
+  column-gap: 24px;
+  row-gap: 0;
+  padding-left: 24px;
+}
+
+.profile-block .research-fields li {
+  margin: 0;
+  padding-right: 4px;
+  overflow-wrap: anywhere;
+}
+
+/* 圖示與成員選單 */
+
+.lab-icon-small {
+  width: 76px;
+  height: auto;
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.topbar .lab-icon-small {
+  width: 58px;
+  background: #fff;
+  border-radius: 3px;
+  padding: 2px;
+}
+
+.lab-icon-about {
+  display: block;
+  width: min(280px,100%);
+  height: auto;
+}
+
+.big-lab {
+  line-height: 1;
+  margin-top: 20px;
+}
+
+.contact-grid .lab-icon-small,.footer-bottom .lab-icon-small {
+  background: #fff;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.member-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 35px;
+}
+
+.member-controls label {
+  font-size: 18px;
+  color: var(--deep);
+}
+
+.member-controls select {
+  font: inherit;
+  font-size: 18px;
+  padding: 10px 38px 10px 16px;
+  border: 1px solid #b9cddd;
+  border-radius: 5px;
+  background: white;
+  color: var(--deep);
+}
+
+.members-heading {
+  font-size: 38px;
+  text-align: center;
+  color: var(--deep);
+  margin-bottom: 40px;
+}
+
+.member-level {
+  margin-bottom: 44px;
+}
+
+.member-level h3 {
+  font-size: 26px;
+  color: var(--deep);
+  border-bottom: 0;
+  margin-bottom: 20px;
+}
+
+.member-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 22px;
+}
+
+.member-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px;
+  background: var(--soft);
+  border-radius: 7px;
+}
+
+.member-photo-placeholder {
+  flex: 0 0 110px;
+  aspect-ratio: 3/4;
+  display: grid;
+  place-items: center;
+  border: 1px dashed #a8bbc9;
+  border-radius: 4px;
+  color: #718496;
+  font-size: 14px;
+  background: white;
+}
+
+.member-card h4 {
+  font-size: 21px;
+  color: #000;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.alumni-placeholder {
+  text-align: center;
+}
+
+.has-js #alumni-members {
+  display: none;
+}
+
+.has-js #alumni-members.is-visible {
+  display: block;
+}
+
+.has-js #current-members.is-hidden {
+  display: none;
+}
+
+@media (max-width:680px) {
+  .member-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .member-card {
+    gap: 20px;
+  }
+
+  .members-heading {
+    font-size: 32px;
+  }
+
+  .member-photo-placeholder {
+    flex-basis: 90px;
+  }
+
+  .footer-bottom .lab-icon-small {
+    width: 52px;
+  }
+
+}
+
+/* 頁首頁尾文字、教授照片及成員導覽 */
+
+.topbar {
+  font-size: 12px;
+}
+
+.department {
+  font-size: 16px;
+}
+
+.department small {
+  font-size: 12px;
+}
+
+.nav-links {
+  font-size: 20px;
+}
+
+.footer-brand {
+  padding-bottom: 36px;
+}
+
+.footer-lab-name,.footer-school {
+  font-size: 15px;
+}
+
+.footer-copyright {
+  font-size: 12px;
+  margin-top: 14px;
+}
+
+footer {
+  padding-top: 34px;
+}
+
+.professor-portrait {
+  padding: 0;
+  background: var(--deep);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.professor-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.professor-caption {
+  padding: 18px 24px;
+}
+
+.professor-caption h2 {
+  font-size: 27px;
+}
+
+.about-lab-name {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--deep);
+}
+
+.service-number {
+  display: block;
+  line-height: 1.15;
+}
+
+.service-grid h3 {
+  font-size: 21px;
+  line-height: 1.5;
+  margin: 5px 0 12px;
+}
+
+.service-grid p {
+  font-size: 17px;
+}
+
+/* 主要成員照片 */
+.member-photo {
+  width: 110px;
+  height: 147px;
+  flex: 0 0 110px;
+  object-fit: cover;
+  object-position: center top;
+  background: #f3f7fa;
+  border-radius: 4px;
+}
+
+/* 預設圖完整顯示，不裁切 */
+.member-photo[src*="temporary-xd."] {
+  object-fit: contain;
+  object-position: center;
+}
+
+.nav-members {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 4px;
+}
+
+.member-nav-toggle {
+  border: 0;
+  background: transparent;
+  color: var(--deep);
+  padding: 8px 0;
+  font-size: 17px;
+}
+
+.member-submenu {
+  display: none;
+  position: absolute;
+  right: 0;
+  min-width: 160px;
+  background: #fff;
+  box-shadow: 0 8px 22px #063b731a;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 5px 14px;
+}
+
+.nav-links .member-submenu a {
+  display: block;
+  font-size: 18px;
+  padding: 10px 0;
+  border: 0;
+  white-space: nowrap;
+}
+
+.member-submenu a:hover {
+  color: var(--blue);
+  background: var(--soft);
+}
+
+.nav-members.submenu-open .member-submenu {
+  display: block;
+}
+
+@media (max-width:950px) {
+  .nav-links {
+    font-size: 20px;
+  }
+
+  .nav-members {
+    align-self: stretch;
+    justify-content: space-between;
+  }
+
+  .member-submenu {
+    position: static;
+    box-shadow: none;
+    border: 0;
+    padding: 0 12px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .nav-members {
+    flex-wrap: wrap;
+  }
+
+  .member-submenu a {
+    font-size: 18px;
+  }
+
+}
+
+@media (max-width:680px) {
+  .department {
+    font-size: 14px;
+  }
+
+  .department small {
+    font-size: 11px;
+  }
+
+  .about-lab-name {
+    font-size: 27px;
+  }
+
+  .member-photo {
+    width: 90px;
+    height: 120px;
+    flex-basis: 90px;
+  }
+
+  .service-grid h3 {
+    font-size: 21px;
+  }
+
+  .service-grid p {
+    font-size: 17px;
+  }
+
+}
+
+/* 教授文字與照片分開，並精簡導覽間距。 */
+
+.profile-copy .advisor-heading {
+  margin-bottom: 12px;
+}
+
+.advisor-identity {
+  margin-bottom: 18px;
+}
+
+.advisor-identity h3 {
+  font-size: 27px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+
+.advisor-identity p {
+  font-size: 18px;
+  color: var(--ink);
+  margin: 0;
+}
+
+.department small {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.nav-links>a,.nav-members>a {
+  padding: 4px 0;
+  border-bottom: 0;
+  line-height: 1.5;
+}
+
+.nav-links>a:hover,.nav-links>a[aria-current="page"],.nav-members>a:hover,.nav-members>a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 5px;
+  color: var(--blue);
+}
+
+.member-nav-toggle {
+  padding: 4px 0;
+  line-height: 1.5;
+}
+
+.member-submenu {
+  left: 0;
+  right: auto;
+  top: 100%;
+  min-width: 100%;
+  padding: 3px 8px;
+}
+
+.nav-links .member-submenu a {
+  padding: 5px 0;
+  line-height: 1.5;
+}
+
+.lab-icon-about {
+  width: min(220px,100%);
+}
+
+.restored-contact {
+  padding-bottom: 34px;
+}
+
+.restored-contact .footer-brand {
+  padding-bottom: 0;
+}
+
+.restored-contact dl div {
+  font-size: 14px;
+}
+
+.restored-contact dd a {
+  text-decoration: none;
+}
+
+@media (max-width:950px) {
+  .nav-members {
+    align-self: stretch;
+  }
+
+  .member-submenu {
+    width: 100%;
+    padding: 2px 8px;
+  }
+
+}
+
+@media (max-width:680px) {
+  .department small {
+    font-size: 15px;
+  }
+
+  .restored-contact {
+    gap: 24px;
+  }
+
+  .advisor-identity h3 {
+    font-size: 25px;
+  }
+
+}
+
+/* 教授欄靠頂，研究室精神與標籤字級依指定比例呈現。 */
+
+#professor .profile-grid {
+  align-items: start;
+}
+
+#professor .profile-copy .advisor-heading {
+  margin-top: 0;
+}
+
+#about {
+  --about-name-size: 30px;
+}
+
+#about .about-lab-name {
+  font-size: var(--about-name-size);
+}
+
+#about .lab-spirit {
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+#about .lab-spirit-emphasis {
+  font-weight: 700;
+  color: #000;
+}
+
+#about .tags span {
+  font-size: 15.9375px;
+}
+
+@media (max-width:680px) {
+  #about {
+    --about-name-size: 27px;
+  }
+
+}
+
+/* 研究室精神以首頁主標題的一半字級呈現，介紹區塊上下等距。 */
+
+:root {
+  --home-title-size: clamp(34px,4.6vw,58px);
+}
+
+.hero h1 {
+  font-size: var(--home-title-size);
+}
+
+#about .lab-spirit {
+  font-size: calc(var(--about-name-size)*0.75);
+  margin: 0;
+  line-height: 1.6;
+}
+
+#about .about-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#about .about-copy>.about-lab-name,#about .about-copy>.tags {
+  margin: 0;
+}
+
+.lab-spirit-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.advisor-identity {
+  margin-bottom: 9px;
+}
+
+.advisor-subtitle {
+  margin-bottom: 10px;
+}
+
+@media (max-width:680px) {
+  :root {
+    --home-title-size: 32px;
+  }
+
+}
+
+/* 兩句作為同一區塊，上下各20px。 */
+
+#about .lab-spirit {
+  font-size: 20.5px;
+}
+
+#about .about-copy {
+  gap: 20px;
+}
+
+#about .lab-spirit-group {
+  margin: 0;
+}
+
+#about .lab-spirit-group .lab-spirit {
+  margin: 0;
+}
+
+@media (max-width:680px) {
+  #about .lab-spirit {
+    font-size: 20.25px;
+  }
+
+}
+
+/* 介紹區塊與上方研究室名稱縮短3px。 */
+
+#about .about-copy {
+  gap: 0;
+}
+
+#about .about-copy>.about-lab-name {
+  margin: 0 0 8px;
+}
+
+#about .about-copy>.lab-spirit-group {
+  margin: 0 0 20px;
+}
+
+/* 姓名下方座右銘，字級為姓名的62.5%。 */
+
+.member-info {
+  min-width: 0;
+  flex: 1;
+  font-size: 21px;
+}
+
+.member-info h4 {
+  font-size: 1em;
+}
+
+.member-motto {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+  padding: 5px 7px;
+  font-family: inherit;
+  font-size: 0.625em;
+  line-height: 1.6;
+  color: #5c7086;
+  background: #fff;
+  border: 1px solid #dce7f1;
+  border-radius: 4px;
+}
+
+.member-motto:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* 座右銘為可在HTML修改的固定文字。 */
+
+.member-info .member-motto {
+  font-size: 16px;
+  margin: 8px 0 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #5c7086;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  overflow-wrap: anywhere;
+}
+
+/* 短頁面頁尾靠視窗底部，標語重點與成員座右銘更新。 */
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+body>main {
+  flex: 1 0 auto;
+}
+
+body>.topbar,body>.site-header,body>footer {
+  flex-shrink: 0;
+}
+
+.advisor-subtitle {
+  font-weight: 700;
+}
+
+/* 首頁標語加粗，桌面與手機均增加4px。 */
+
+.hero-subtitle {
+  font-weight: 700;
+  font-size: clamp(21px,calc(2vw + 4px),28px);
+}
+
+@media (max-width:680px) {
+  .hero-subtitle {
+    font-size: 22px;
+  }
+
+}
+
+.content-status {
+  font-size: 16px;
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+
+.content-error {
+  padding: 14px 18px;
+  background: #fff5ee;
+  border-left: 3px solid #b56a27;
+  overflow-wrap: anywhere;
+}
+
+.content-empty {
+  text-align: center;
+}
+
+.news-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-top: 14px;
+  border-radius: 4px;
+}
+
+.news-link {
+  display: inline-block;
+  color: var(--blue);
+  text-decoration: underline;
+  margin-top: 12px;
+}
+
+#alumni-members .alumni-name {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}
+
+/* 畢業名單：連續編號，每筆姓名、題目、研究所與年份同段呈現。 */
+
+#alumni-members .alumni-intro {
+  font-size: 15px;
+  font-weight: 400;
+  color: #686868;
+  line-height: 1.25;
+  margin: 0 0 8px;
+}
+
+#alumni-members .alumni-list {
+  padding-left: 46px;
+}
+
+#alumni-members .alumni-list .alumni-name {
+  display: inline;
+  font-size: 15px;
+  font-weight: 400;
+  color: inherit;
+}
+
+/* 畢業清單：換行時保留正常行距與高度 */
+
+#alumni-members .alumni-list li {
+  font-size: 15px;
+  color: #686868;
+  height: auto;
+  max-height: none;
+  line-height: 1.5;
+  padding: 6px 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+#alumni-members .alumni-list li span {
+  display: inline;
+  line-height: inherit;
+}
+
+/* 矮視窗的錨點捲動留白 */
+
+@media (max-height: 500px) {
+  html {
+    scroll-padding-top: 16px;
+  }
+
+}
+
+/* 下拉選單僅依JavaScript展開狀態顯示。 */
+
+.member-nav-toggle:focus-visible {
+  outline: 3px solid #e7aa38;
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.industry-result {
+  margin-bottom: 28px;
+}
+
+.industry-result h3 {
+  font-size: 22px;
+  color: var(--deep);
+  margin-bottom: 10px;
+}
+
+.industry-result p {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+/* 頁尾：第一行為教授與研究室聯絡人，第二行為對齊的兩個信箱。 */
+
+.contact-grid.restored-contact {
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 70px;
+}
+
+.contact-grid dl.contact-info {
+  min-width: 0;
+}
+
+.contact-grid dl.contact-info > div {
+  grid-template-columns: 74px minmax(0,1fr);
+  column-gap: 6px;
+  align-items: baseline;
+}
+
+.contact-grid dl.contact-info > .contact-identity,
+.contact-grid dl.contact-info > .contact-mail {
+  grid-template-columns: 74px minmax(0,1fr) 84px minmax(0,1fr);
+}
+
+.contact-info dt {
+  white-space: nowrap;
+}
+
+.contact-identity dd {
+  white-space: nowrap;
+}
+
+.news-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.news-title-link:hover {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.news-title-link:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+}
+
+@media (max-width:680px) {
+  .contact-grid.restored-contact {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .contact-grid dl.contact-info > div {
+    grid-template-columns: 98px minmax(0,1fr);
+  }
+
+  .contact-grid dl.contact-info > .contact-identity {
+    grid-template-columns: 74px minmax(0,1fr);
+  }
+
+  .contact-grid dl.contact-info > .contact-mail {
+    grid-template-columns: 74px minmax(0,1fr);
+  }
+
+  .contact-mail dd:last-child {
+    grid-column: 2;
+  }
+
+}
+
+/* 產學成果：沿用首頁輔導卡片，六項內容與合作夥伴分區。 */
+
+.industry-block + .industry-block {
+  margin-top: 56px;
+}
+
+.industry-section-heading {
+  font-size: 30px;
+  line-height: 1.4;
+  color: var(--deep);
+  margin: 0 0 24px;
+}
+
+.industry-guidance-grid {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 22px;
+}
+
+.industry-guidance-grid article {
+  min-width: 0;
+}
+
+.industry-guidance-grid h4 {
+  font-size: 21px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 5px 0 12px;
+}
+
+.industry-guidance-grid ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.industry-guidance-grid li {
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+  text-align: justify;
+  text-align-last: left;
+}
+
+.partner-grid:empty {
+  display: none;
+}
+
+@media (max-width:1100px) {
+  .industry-guidance-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+
+}
+
+@media (max-width:680px) {
+  .industry-guidance-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .industry-section-heading {
+    font-size: 26px;
+  }
+
+  .industry-block + .industry-block {
+    margin-top: 40px;
+  }
+
+}
+
+/* 學術研究排版：在這裡集中調整，不影響畢業成員。 */
+
+#academic-research .publication-list li {
+  padding: 4px 0;
+  /* 第 1、2、3 篇文獻彼此之間的上下留白 */
+  margin: 0;
+}
+
+#academic-research .publication-title {
+  font-size: 15px;
+  line-height: 1.8;
+  /* 標題換行的行距 */
+  letter-spacing: 0px;
+  /* 字距 */
+}
+
+#academic-research .publication-authors,
+#academic-research .publication-venue {
+  font-size: 15px;
+  line-height: 1.8;
+  letter-spacing: 0px;
+  margin-top: 5px;
+  /* 標題、作者、期刊資訊彼此的間隔 */
+}
+
+/* 合作夥伴：純圖片展示，無超連結、無卡片與邊框。 */
+
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(6,minmax(0,1fr));
+  column-gap: 26px;
+  row-gap: 22px;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.partner-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 100px;
+  overflow: hidden;
+}
+
+.partner-logo img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 76px;
+  object-fit: contain;
+}
+
+.partner-logo--ose img {
+  max-width: 158px;
+  max-height: 86px;
+  padding: 5px 12px;
+  background: #0d0d0d;
+  border-radius: 3px;
+}
+
+@media (max-width:980px) {
+  .partner-grid {
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    column-gap: 22px;
+    row-gap: 18px;
+  }
+
+}
+
+@media (max-width:600px) {
+  .partner-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    column-gap: 18px;
+    row-gap: 14px;
+  }
+
+  .partner-logo {
+    min-height: 90px;
+  }
+
+  .partner-logo img {
+    max-height: 66px;
+  }
+
+}
+
+/* 移除前置編號後讓卡片標題不留編號位置 */
+
+.service-grid:not(.industry-guidance-grid) h3 {
+  margin-top: 12px;
+}
+
+.industry-guidance-grid h4 {
+  margin-top: 8px;
+}
+
+/* 2026-10-26 修正：首頁標語局部綠字、頁尾聯絡資訊在中小尺寸避免跑版。 */
+
+.hero-subtitle .hero-white {
+  color: #fff;
+}
+
+.hero-subtitle .hero-accent {
+  color: #7ce0a7;
+}
+
+.hero-subtitle .hero-result {
+  color: #7ce0a7;
+}
+
+.contact-info dd,.contact-info dd a {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width:980px) {
+  .contact-grid.restored-contact {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .contact-grid dl.contact-info > div {
+    grid-template-columns: 98px minmax(0,1fr);
+  }
+
+  .contact-grid dl.contact-info > .contact-identity,
+  .contact-grid dl.contact-info > .contact-mail {
+    grid-template-columns: 98px minmax(0,1fr);
+  }
+
+  .contact-identity dd,.contact-mail dd {
+    white-space: normal;
+  }
+
+  .contact-mail dd:last-child {
+    grid-column: 2;
+  }
+
+}
+
+/* 2026-10-26：最新消息獨立分類頁，沿用既有簡潔研究室風格。 */
+
+.news-section-title {
+  margin: 0 0 14px;
+}
+
+.news-category-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 0 0 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.news-category-nav a {
+  display: inline-block;
+  padding: 6px 2px 10px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--muted);
+  border-bottom: 3px solid transparent;
+}
+
+.news-category-nav a:hover,.news-category-nav a[aria-current="page"] {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+}
+
+.nav-news>a[aria-current="location"] {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 5px;
+  color: var(--blue);
+}
+
+.news-list .content-empty {
+  padding: 16px 0;
+  color: var(--muted);
+}
+
+@media (max-width:680px) {
+  .news-category-nav {
+    gap: 22px;
+  }
+
+  .news-category-nav a {
+    font-size: 16px;
+  }
+
+}
+
+/* 25 家合作夥伴：桌面改為五欄五列；在較窄螢幕置中最後一張 Logo。 */
+
+@media (min-width:981px) {
+  .partner-grid {
+    grid-template-columns: repeat(5,minmax(0,1fr));
+  }
+
+}
+
+@media (min-width:601px) and (max-width:980px) {
+  .partner-grid>.partner-logo:last-child:nth-child(4n + 1) {
+    grid-column: 2 / span 2;
+  }
+
+}
+
+@media (max-width:600px) {
+  .partner-grid>.partner-logo:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+}
+
+/* 最新消息：分類導覽已經有下邊線，避免第一篇報導再出現重複分隔線。 */
+
+/* 最新消息：縮短分類線、第一篇及各篇文章之間的距離。 */
+
+.news-category-nav {
+  margin-bottom: 0;
+}
+
+.news-list {
+  margin-top: 0;
+}
+
+.news-list article {
+  padding: 14px 0;
+}
+
+.news-list > article:first-child {
+  border-top: none;
+  padding-top: 14px;
+}
+
+.news-list h2 {
+  margin: 6px 0;
+}

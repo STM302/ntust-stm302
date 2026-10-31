@@ -1,0 +1,330 @@
+[
+  {
+    "name": "JONATHAN",
+    "degree": "碩士",
+    "thesis": "以輕推理論評估循環經濟實踐的結果論",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2021,
+    "year_note": ""
+  },
+  {
+    "name": "Napasorn Sriwattana",
+    "degree": "碩士",
+    "thesis": "Towards a Net Zero Carbon Emission: The barriers analysis of electric vehicle transition",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2021,
+    "year_note": ""
+  },
+  {
+    "name": "範氏庄",
+    "degree": "博士",
+    "thesis": "在動態和瞬態操作下評估微電網的電池儲 能和太陽能發電源的可靠度",
+    "institute": "中原大學工業與系統工程研究所",
+    "graduation_year": 2021,
+    "year_note": "共同指導"
+  },
+  {
+    "name": "陳世捷",
+    "degree": "碩士",
+    "thesis": "電子零件配銷商的轉型管理- 以 S 企業公司為例",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2021,
+    "year_note": ""
+  },
+  {
+    "name": "陳良爲",
+    "degree": "碩士",
+    "thesis": "以隨機森林法提升生產效率與降低環境衝擊：以半導體企業為例",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2021,
+    "year_note": ""
+  },
+  {
+    "name": "林冠丞",
+    "degree": "碩士",
+    "thesis": "台灣半導體製造業產值與碳排放之脫鉤指標及因素分析",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2021,
+    "year_note": ""
+  },
+  {
+    "name": "張凱柏",
+    "degree": "碩士",
+    "thesis": "以資料包絡分析法作電動車充電站模擬運營績效分析",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2021,
+    "year_note": ""
+  },
+  {
+    "name": "Putri Amalia",
+    "degree": "碩士",
+    "thesis": "最佳化的廢棄物管理系統:使用模糊容量與隨機旅行時間於容量限制路徑的車輛行駛問題",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2021,
+    "year_note": ""
+  },
+  {
+    "name": "林盈宇",
+    "degree": "碩士",
+    "thesis": "客訴管理-流程再造探討與分析",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2021,
+    "year_note": ""
+  },
+  {
+    "name": "Tsehaye Dedimas Beyene",
+    "degree": "博士",
+    "thesis": "考慮再生能源與動態差異化定價之電力配送網路設計問題",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2022,
+    "year_note": "共同指導"
+  },
+  {
+    "name": "羅麗文",
+    "degree": "碩士",
+    "thesis": "體積塊除料法對大型鋁製框架製造成本之效應分析",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2022,
+    "year_note": ""
+  },
+  {
+    "name": "周品綸",
+    "degree": "碩士",
+    "thesis": "循環包裝物流的環境衝擊分析",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2022,
+    "year_note": ""
+  },
+  {
+    "name": "陳鎰豐",
+    "degree": "碩士",
+    "thesis": "應用DBSCAN演算法及OR-Tools建置員工通勤交通車路線",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2022,
+    "year_note": ""
+  },
+  {
+    "name": "曾若定",
+    "degree": "碩士",
+    "thesis": "跨國企業多重因素下ESG對財務指標與企業市值的影響- 來自能源產業的實證",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2022,
+    "year_note": ""
+  },
+  {
+    "name": "歐怡華",
+    "degree": "碩士",
+    "thesis": "消費者對碳足跡標籤產品之認知程度、社會因素與政府法規對購買意願之影響",
+    "institute": "國立臺灣科技大學管理學院MBA",
+    "graduation_year": 2023,
+    "year_note": ""
+  },
+  {
+    "name": "黃靜如",
+    "degree": "碩士",
+    "thesis": "傳統產業有效進行溫室氣體盤查之方法-以衛生用品製造N公司為例",
+    "institute": "國立臺灣科技大學管理研究所",
+    "graduation_year": 2023,
+    "year_note": ""
+  },
+  {
+    "name": "朱偉豪",
+    "degree": "碩士",
+    "thesis": "評估上市公司參與國際永續評比對企業永續發展之關鍵因素",
+    "institute": "國立臺灣科技大學管理研究所",
+    "graduation_year": 2023,
+    "year_note": ""
+  },
+  {
+    "name": "柯方甯",
+    "degree": "碩士",
+    "thesis": "淨零行動與企業價值關聯性分析",
+    "institute": "國立臺灣科技大學管理研究所",
+    "graduation_year": 2023,
+    "year_note": ""
+  },
+  {
+    "name": "徐于婷",
+    "degree": "碩士",
+    "thesis": "企業推行ESG之效益-以P公司為例",
+    "institute": "國立臺灣科技大學管理研究所",
+    "graduation_year": 2023,
+    "year_note": ""
+  },
+  {
+    "name": "李冠樺",
+    "degree": "碩士",
+    "thesis": "考慮碳排放量下的在地採購供應商評估與分析",
+    "institute": "國立臺灣科技大學管理學院MBA",
+    "graduation_year": 2023,
+    "year_note": ""
+  },
+  {
+    "name": "陳弘畧",
+    "degree": "碩士",
+    "thesis": "貿易戰方興未艾，製造業移出中國如何維持競爭力 — 以Z公司為例",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2023,
+    "year_note": ""
+  },
+  {
+    "name": "洪嘉辰",
+    "degree": "碩士",
+    "thesis": "電動車鋰電池生產與回收策略：以生命週期評估法建立的模型研究",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2023,
+    "year_note": ""
+  },
+  {
+    "name": "孫敬堯",
+    "degree": "碩士",
+    "thesis": "納入碳價格的企業決策模型系統動力學分析",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2023,
+    "year_note": ""
+  },
+  {
+    "name": "林仁鈞",
+    "degree": "碩士",
+    "thesis": "關鍵基礎設施物聯網場域研究：以資訊安全分析為例",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2023,
+    "year_note": ""
+  },
+  {
+    "name": "ALDA BELLA OSEASKY",
+    "degree": "碩士",
+    "thesis": "改變消費者行為以盡量減少時尚浪費",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2023,
+    "year_note": ""
+  },
+  {
+    "name": "鍾丞勛",
+    "degree": "碩士",
+    "thesis": "以生命週期評估法探討畜牧業增設沼氣發電設施之效益分析",
+    "institute": "國立臺灣科技大學管理學院MBA",
+    "graduation_year": 2024,
+    "year_note": ""
+  },
+  {
+    "name": "陳禾軒",
+    "degree": "碩士",
+    "thesis": "中小企業因應淨零趨勢的減碳轉型之路",
+    "institute": "國立臺灣科技大學管理學院MBA",
+    "graduation_year": 2024,
+    "year_note": ""
+  },
+  {
+    "name": "林子嫥",
+    "degree": "碩士",
+    "thesis": "應用機器學習預測半導體產品碳足跡的實證研究",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2024,
+    "year_note": ""
+  },
+  {
+    "name": "李昀庭",
+    "degree": "碩士",
+    "thesis": "考慮通勤意願之綠運輸模型",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2024,
+    "year_note": ""
+  },
+  {
+    "name": "邱宜傑",
+    "degree": "碩士",
+    "thesis": "國際工程公司與策略夥伴的框架協議-以個案C公司策略研究為例",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2024,
+    "year_note": ""
+  },
+  {
+    "name": "黃儒仁",
+    "degree": "碩士",
+    "thesis": "台灣筆記型電腦二線ODM廠生存的競爭策略之路 - 以 C 公司為例",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2024,
+    "year_note": ""
+  },
+  {
+    "name": "陳純卿",
+    "degree": "碩士",
+    "thesis": "“疫”起翻轉-旅宿營運危機碰轉機-以Fawn旅宿集團為例",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2024,
+    "year_note": ""
+  },
+  {
+    "name": "IBNU ZULKARNAIN",
+    "degree": "碩士",
+    "thesis": "以 AI 為基礎的可持續航空燃料 (SAF) 供應商選擇決策支援系統： 多標準預測分析方法",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2024,
+    "year_note": ""
+  },
+  {
+    "name": "Dana Azizah Rahmat",
+    "degree": "碩士",
+    "thesis": "嵌入ChatGPT代理於回收建模與模擬中的探索性研究",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2024,
+    "year_note": ""
+  },
+  {
+    "name": "徐睿吟",
+    "degree": "碩士",
+    "thesis": "產業預期目標之減碳模型-以半導體產業為例",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2025,
+    "year_note": ""
+  },
+  {
+    "name": "RAIHAN ABDURRAHMAN",
+    "degree": "碩士",
+    "thesis": "結合代理人基礎建模與大型語言模型之電動車租賃循環回收決策支援模擬框架",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2025,
+    "year_note": ""
+  },
+  {
+    "name": "李昱臻",
+    "degree": "碩士",
+    "thesis": "結合 NSGA-II 與 TOPSIS 之多目標決策框架：半導體永續載帶設計之最佳化研究",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2025,
+    "year_note": ""
+  },
+  {
+    "name": "呂怡德",
+    "degree": "碩士",
+    "thesis": "社會企業創新展示模式－以行動環保教育車為例",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2025,
+    "year_note": ""
+  },
+  {
+    "name": "陳威誠",
+    "degree": "碩士",
+    "thesis": "結合碳排預測不確定性與多目標最佳化\u000b之研發階段材料減碳決策支援架構",
+    "institute": "國立臺灣科技大學智慧製造科技研究所",
+    "graduation_year": 2025,
+    "year_note": "共同指導"
+  },
+  {
+    "name": "黃亮晨",
+    "degree": "碩士",
+    "thesis": "結合機器學習與蒙地卡羅模擬之半導體產品碳足跡不確定性分析與決策支援研究",
+    "institute": "國立臺灣科技大學智慧製造科技研究所",
+    "graduation_year": 2025,
+    "year_note": "共同指導"
+  },
+  {
+    "name": "黃煜晉",
+    "degree": "碩士",
+    "thesis": "基於機器學習與結構穩定性指標之半導體製程碳排放結構穩健性分析與決策支援研究",
+    "institute": "國立臺灣科技大學工業管理系",
+    "graduation_year": 2025,
+    "year_note": ""
+  }
+]
