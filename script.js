@@ -2,6 +2,7 @@
   'use strict';
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
+
   const toggle = document.querySelector('.menu-toggle');
   const links = document.getElementById('navLinks');
   const hoverPointer = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -86,33 +87,29 @@
     showMemberCategory();
   }
 
-  // 在每頁正文與頁尾之間加入回到頁首按鈕。
-  const footer = document.querySelector('body > footer');
-  if (footer && !document.querySelector('.back-to-top-bar')) {
-    const pageTop = document.querySelector('.topbar') || document.body;
-    if (!pageTop.id) pageTop.id = 'page-top';
+  // 向下捲動後顯示固定於視窗右下角的回到頁首按鈕。
+  if (!document.querySelector('.back-to-top')) {
+    const button = document.createElement('button');
+    button.className = 'back-to-top';
+    button.type = 'button';
+    button.setAttribute('aria-label', '回到頁首');
+    button.innerHTML = '<span aria-hidden="true">↑</span>';
 
-    const bar = document.createElement('div');
-    bar.className = 'back-to-top-bar';
+    const syncBackToTop = () => {
+      const visible = window.scrollY > 320;
+      button.classList.toggle('is-visible', visible);
+      button.tabIndex = visible ? 0 : -1;
+    };
 
-    const inner = document.createElement('div');
-    inner.className = 'wrap';
-
-    const link = document.createElement('a');
-    link.className = 'back-to-top';
-    link.href = '#page-top';
-    link.textContent = 'TOP';
-    link.setAttribute('aria-label', '回到頁首');
-    link.addEventListener('click', event => {
-      event.preventDefault();
+    button.addEventListener('click', () => {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     });
-
-    inner.append(link);
-    bar.append(inner);
-    footer.before(bar);
+    window.addEventListener('scroll', syncBackToTop, { passive: true });
+    syncBackToTop();
+    document.body.append(button);
   }
+
   // 原本 HTML 的 assets 圖片保持相同檔名；副檔名更換時自動嘗試其他格式。
   const refreshAssetImages = () => {
     document.querySelectorAll('img[src]').forEach(image => {
