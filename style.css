@@ -2730,7 +2730,7 @@ body>.topbar,body>.site-header,body>footer {
   border-radius: 50%;
   appearance: none;
   -webkit-appearance: none;
-  background: #2f66e9;
+  background: #0b477d;
   color: #fff;
   box-shadow: 0 8px 20px rgb(35 74 150 / 24%);
   cursor: pointer;
@@ -2763,7 +2763,7 @@ body>.topbar,body>.site-header,body>footer {
 .back-to-top:hover,
 .back-to-top:active,
 .back-to-top:focus {
-  background: #2f66e9;
+  background: #0b477d;
   color: #fff;
 }
 
