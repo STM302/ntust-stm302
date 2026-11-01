@@ -2758,7 +2758,7 @@ body>.topbar,body>.site-header,body>footer {
   color: var(--blue);
 }
 
-/* 子選單在整個導覽面板下方展開，不參與主選單的 Grid 排版。 */
+/* 行動版子選單緊貼被點擊項目下方，浮在內容上方且不推動其他選項。 */
 @media (max-width:950px) {
   .nav-links.open {
     align-items: start;
@@ -2771,7 +2771,7 @@ body>.topbar,body>.site-header,body>footer {
   }
 
   .nav-links.open > .nav-members {
-    position: static;
+    position: relative;
     display: grid;
     grid-template-columns: minmax(0,1fr) 36px;
     align-items: start;
@@ -2788,17 +2788,22 @@ body>.topbar,body>.site-header,body>footer {
     position: absolute;
     top: 100%;
     left: 0;
-    right: 0;
-    width: 100%;
-    min-width: 0;
-    padding: 8px 24px 12px;
+    right: auto;
+    width: max-content;
+    min-width: 160px;
+    padding: 5px 14px;
     background: #fff;
-    border: 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    border-radius: 0;
+    border: 1px solid var(--line);
+    border-radius: 4px;
     box-shadow: 0 8px 18px #063b731a;
     z-index: 30;
+  }
+
+  /* 右欄選單向右對齊，避免白色選單超出手機畫面。 */
+  .nav-links.open > .nav-news > .member-submenu,
+  .nav-links.open > .nav-members:last-child > .member-submenu {
+    left: auto;
+    right: 0;
   }
 
   .nav-links.open > .nav-members > .member-submenu a {
@@ -2818,8 +2823,4 @@ body>.topbar,body>.site-header,body>footer {
     font-size: 13px;
   }
 
-  .nav-links.open > .nav-members > .member-submenu {
-    padding-right: 20px;
-    padding-left: 20px;
-  }
 }
