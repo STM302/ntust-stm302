@@ -87,28 +87,33 @@
     showMemberCategory();
   }
 
-  // 向下捲動後顯示固定於視窗右下角的回到頁首按鈕。
-  if (!document.querySelector('.back-to-top')) {
-    const button = document.createElement('button');
-    button.className = 'back-to-top';
-    button.type = 'button';
-    button.setAttribute('aria-label', '回到頁首');
-    button.innerHTML = '<span aria-hidden="true">↑</span>';
+  // 桌機與手機共用：向下捲動後顯示固定於視窗右下角的回到頁首按鈕。
+  document.querySelector('.back-to-top-bar')?.remove();
+  document.querySelector('.back-to-top')?.remove();
 
-    const syncBackToTop = () => {
-      const visible = window.scrollY > 320;
-      button.classList.toggle('is-visible', visible);
-      button.tabIndex = visible ? 0 : -1;
-    };
+  const button = document.createElement('button');
+  button.className = 'back-to-top';
+  button.type = 'button';
+  button.setAttribute('aria-label', '回到頁首');
+  button.innerHTML = `
+    <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+      <path d="M5 15l7-7 7 7"></path>
+    </svg>`;
 
-    button.addEventListener('click', () => {
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
-    });
-    window.addEventListener('scroll', syncBackToTop, { passive: true });
-    syncBackToTop();
-    document.body.append(button);
-  }
+  const syncBackToTop = () => {
+    const visible = window.scrollY > 320;
+    button.classList.toggle('is-visible', visible);
+    button.tabIndex = visible ? 0 : -1;
+  };
+
+  button.addEventListener('click', () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    button.blur();
+  });
+  window.addEventListener('scroll', syncBackToTop, { passive: true });
+  syncBackToTop();
+  document.body.append(button);
 
   // 原本 HTML 的 assets 圖片保持相同檔名；副檔名更換時自動嘗試其他格式。
   const refreshAssetImages = () => {
