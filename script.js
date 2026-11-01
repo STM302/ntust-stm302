@@ -2,7 +2,6 @@
   'use strict';
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
-
   const toggle = document.querySelector('.menu-toggle');
   const links = document.getElementById('navLinks');
   const hoverPointer = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -104,12 +103,16 @@
     link.href = '#page-top';
     link.textContent = 'TOP';
     link.setAttribute('aria-label', '回到頁首');
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
 
     inner.append(link);
     bar.append(inner);
     footer.before(bar);
   }
-
   // 原本 HTML 的 assets 圖片保持相同檔名；副檔名更換時自動嘗試其他格式。
   const refreshAssetImages = () => {
     document.querySelectorAll('img[src]').forEach(image => {
