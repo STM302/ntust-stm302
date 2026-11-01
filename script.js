@@ -87,6 +87,29 @@
     showMemberCategory();
   }
 
+  // 在每頁正文與頁尾之間加入回到頁首按鈕。
+  const footer = document.querySelector('body > footer');
+  if (footer && !document.querySelector('.back-to-top-bar')) {
+    const pageTop = document.querySelector('.topbar') || document.body;
+    if (!pageTop.id) pageTop.id = 'page-top';
+
+    const bar = document.createElement('div');
+    bar.className = 'back-to-top-bar';
+
+    const inner = document.createElement('div');
+    inner.className = 'wrap';
+
+    const link = document.createElement('a');
+    link.className = 'back-to-top';
+    link.href = '#page-top';
+    link.textContent = 'TOP';
+    link.setAttribute('aria-label', '回到頁首');
+
+    inner.append(link);
+    bar.append(inner);
+    footer.before(bar);
+  }
+
   // 原本 HTML 的 assets 圖片保持相同檔名；副檔名更換時自動嘗試其他格式。
   const refreshAssetImages = () => {
     document.querySelectorAll('img[src]').forEach(image => {
