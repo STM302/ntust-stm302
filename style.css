@@ -2712,3 +2712,114 @@ body>.topbar,body>.site-header,body>footer {
 .news-list h2 {
   margin: 6px 0;
 }
+
+/* 2026-11-01：頁尾前 TOP 按鈕與行動版導覽穩定化。 */
+
+/* TOP 固定出現在正文與聯絡資訊之間，不遮住頁面內容。 */
+.back-to-top-bar {
+  background: #fff;
+  padding: 16px 0 22px;
+}
+
+.back-to-top-bar .wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 76px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid #b9d0e6;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--deep);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .08em;
+  box-shadow: 0 4px 14px #063b7312;
+}
+
+.back-to-top::before {
+  content: "↑";
+  margin-right: 7px;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.back-to-top:hover {
+  border-color: var(--blue);
+  background: var(--soft);
+  color: var(--blue);
+}
+
+/* 子選單在整個導覽面板下方展開，不參與主選單的 Grid 排版。 */
+@media (max-width:950px) {
+  .nav-links.open {
+    align-items: start;
+  }
+
+  .nav-links.open > a,
+  .nav-links.open > .nav-members {
+    min-width: 0;
+    align-self: start;
+  }
+
+  .nav-links.open > .nav-members {
+    position: static;
+    display: grid;
+    grid-template-columns: minmax(0,1fr) 36px;
+    align-items: start;
+    gap: 4px;
+    flex-wrap: nowrap;
+  }
+
+  .nav-links.open > .nav-members > .member-nav-toggle {
+    width: 36px;
+    justify-self: end;
+  }
+
+  .nav-links.open > .nav-members > .member-submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: 0;
+    padding: 8px 24px 12px;
+    background: #fff;
+    border: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    box-shadow: 0 8px 18px #063b731a;
+    z-index: 30;
+  }
+
+  .nav-links.open > .nav-members > .member-submenu a {
+    padding: 7px 0;
+  }
+}
+
+@media (max-width:680px) {
+  .back-to-top-bar {
+    padding: 14px 0 18px;
+  }
+
+  .back-to-top {
+    min-width: 70px;
+    min-height: 42px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .nav-links.open > .nav-members > .member-submenu {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
