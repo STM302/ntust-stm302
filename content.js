@@ -6,6 +6,7 @@
     publications: ['文獻標題','年份','類別','作者','期刊或會議','補充資訊','索引','顯示'],
     'news-perspectives': ['編號','日期','類別','標題','內文','圖片說明','連結文字','連結網址','顯示'],
     'news-media': ['編號','日期','類別','標題','內文','圖片說明','連結文字','連結網址','顯示'],
+    'news-articles': ['編號','圖片檔名','文章內容','顯示'],
     news: ['編號','日期','類別','標題','內文','圖片說明','連結文字','連結網址','顯示']
   };
   const extensions = ['png','jpg','jpeg','webp','avif'];
@@ -78,7 +79,12 @@
         check(/^[a-zA-Z0-9_-]+$/.test(row['編號']), `第 ${i+2} 列「編號」只能含英文字母、數字、-、_。`);
         check(!mapped.some(r=>r.id===row['編號']), `消息編號 ${row['編號']} 重複。`);
         check(!row['連結文字'] || Boolean(row['連結網址']), `第 ${i+2} 列有連結文字時，請一起填寫連結網址。`);
-        mapped.push({id:row['編號'],date:row['日期'],category:row['類別'],title:row['標題'],paragraphs:row['內文'].split(/\r?\n\s*\r?\n/).filter(Boolean),image:`assets/${row['編號']}.png`,image_auto:true,image_alt:row['圖片說明'],...(row['連結網址']?{link:{url:row['連結網址'],text:row['連結文字']||row['標題']}}:{})});
+        mapped.push({id:row['編號'],article_id:header.includes('文章編號')?(row['文章編號']||row['編號']):row['編號'],date:row['日期'],category:row['類別'],title:row['標題'],summary:header.includes('摘要')?row['摘要']:'',paragraphs:row['內文'].split(/\r?\n\s*\r?\n/).filter(Boolean),image:`assets/${row['編號']}.png`,image_auto:true,image_alt:row['圖片說明'],...(row['連結網址']?{link:{url:row['連結網址'],text:row['連結文字']||row['標題']}}:{})});
+      }
+      if (kind === 'news-articles') {
+        check(/^[a-zA-Z0-9_-]+$/.test(row['編號']), `第 ${i+2} 列「編號」只能含英文字母、數字、-、_。`);
+        check(!mapped.some(r=>r.id===row['編號']), `文章編號 ${row['編號']} 重複。`);
+        mapped.push({id:row['編號'],image:row['圖片檔名'],content:row['文章內容']});
       }
     });
     if (kind === 'publications') {
@@ -93,7 +99,9 @@
   }
   function publishedURL(value) {
     const url = new URL(value);
-    check(url.protocol === 'https:' && url.hostname === 'docs.google.com' && /^\/spreadsheets\/d\/e\/[^/]+\/pub$/.test(url.pathname) && url.searchParams.get('output') === 'csv' && /^\d+$/.test(url.searchParams.get('gid') || ''), '請填各工作表發布後的 CSV 網址，網址應包含 output=csv 與 gid。');
+    const published = /^\/spreadsheets\/d\/e\/[^/]+\/pub$/.test(url.pathname) && url.searchParams.get('output') === 'csv';
+    const sharedSheet = /^\/spreadsheets\/d\/[^/]+\/gviz\/tq$/.test(url.pathname) && url.searchParams.get('tqx') === 'out:csv';
+    check(url.protocol === 'https:' && url.hostname === 'docs.google.com' && (published || sharedSheet) && /^\d+$/.test(url.searchParams.get('gid') || ''), '請填各工作表的 CSV 網址，網址應包含 CSV 輸出格式與 gid。');
     return url.href;
   }
   function config() {
@@ -109,7 +117,7 @@
     if (source?.csv_url) {
       try {
         const data=parse(await request(publishedURL(source.csv_url),'text'),kind);
-        render(data);
+        await render(data);
         root.dataset.loadedFrom='google-sheets';
         return;
       } catch(error) {
@@ -117,8 +125,20 @@
         root.dataset.syncError=error.message;
       }
     }
-    render(await request(root.dataset.source,'json',4000));
+    await render(await request(root.dataset.source,'json',4000));
     root.dataset.loadedFrom='json';
+  }
+  async function fetchKind(kind, fallbackSource) {
+    const settings=schema[kind] ? await config() : {};
+    const source=settings.sources?.[kind];
+    if (source?.csv_url) {
+      try {
+        return parse(await request(publishedURL(source.csv_url),'text'),kind);
+      } catch(error) {
+        console.warn(`STM302 ${kind} 試算表讀取失敗，使用 JSON 備份。`,error);
+      }
+    }
+    return fallbackSource ? request(fallbackSource,'json',4000) : [];
   }
   function imageCandidates(path) {
     const url=new URL(path,window.location.href);
@@ -180,7 +200,7 @@
       return ['clarivate.com','www.clarivate.com','jcr.clarivate.com','jcr.help.clarivate.com','clarivate.libguides.com','journalcitationreports.zendesk.com'].includes(url.hostname);
     } catch { return false; }
   }
-  window.STM302Data={load,parse,publishedURL,imageCandidates,isDocumentPage,isNonPdfSource,documentPageURL};
+  window.STM302Data={load,fetchKind,parse,publishedURL,imageCandidates,isDocumentPage,isNonPdfSource,documentPageURL};
 })();
 
 /* 研究成果、畢業論文、消息優先讀取試算表，原 JSON 作為備份。 */
@@ -389,7 +409,7 @@
       if (!alumni.length) alumniFragment.append(element('p', 'alumni-placeholder', '畢業成員名單待補'));
       list.replaceChildren(alumniFragment);
     }
-    function news(rows) {
+    async function news(rows) {
       requireValue(Array.isArray(rows), '最新消息必須為陣列。');
       rows.forEach((row, i) => {
         const label = `消息第 ${i + 1} 筆`;
@@ -404,6 +424,8 @@
           safeURL(row.link.url);
         }
       });
+      const articleRows = await window.STM302Data.fetchKind('news-articles','news-articles.json').catch(() => []);
+      const articleIds = new Set(articleRows.map(row => row.id));
       const fragment = document.createDocumentFragment();
       [...rows].sort((a, b) => b.date.localeCompare(a.date)).forEach(row => {
         const article = element('article');
@@ -415,9 +437,15 @@
           const link = element('a', 'news-title-link', row.title);
           link.href = safeURL(row.link.url);
           heading.append(link);
+        } else if (articleIds.has(row.article_id) || row.paragraphs.some(paragraph => paragraph.trim())) {
+          const link = element('a', 'news-title-link', row.title);
+          link.href = `article.html?id=${encodeURIComponent(row.article_id)}`;
+          heading.append(link);
         } else heading.textContent = row.title;
         content.append(element('span', 'category', row.category), heading);
-        row.paragraphs.forEach(paragraph => content.append(element('p', '', paragraph)));
+        const summarySource = (row.summary || row.paragraphs[0] || '').replace(/\s+/g,' ').trim();
+        const summary = summarySource.length > 120 ? `${summarySource.slice(0,120).trimEnd()}…` : summarySource;
+        if (summary) content.append(element('p', 'news-summary', summary));
         if (row.image) {
           const image = element('img', 'news-image');
           const paths = window.STM302Data.imageCandidates(safeURL(row.image, true));

@@ -11,6 +11,9 @@
     },
     "news-perspectives": {
       "csv_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGfgU_Legm4RV15cBSI_fFYdbrsxm7eWQ_7YI5wuX5Hb3LnPUSwYgcaJfbdWes9iJtyyeE1TrAetzf/pub?gid=2028868110&single=true&output=csv"
+    },
+    "news-articles": {
+      "csv_url": "https://docs.google.com/spreadsheets/d/1vowoZ_Sc8OmTToxb2uomGK3sf1S9-Palzht16q9ttoM/gviz/tq?tqx=out:csv&gid=20261104"
     }
   }
 }
