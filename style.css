@@ -2880,6 +2880,7 @@ body>.topbar,body>.site-header,body>footer {
   place-items: center;
   width: 96px;
   justify-self: center;
+  transform: translateX(30px);
 }
 .header-lab-mark img {
   display: block;
@@ -3027,6 +3028,7 @@ body>.topbar,body>.site-header,body>footer {
     grid-area: mark;
     width: 82px;
     justify-self: end;
+    transform: none;
   }
   .header-lab-mark img {
     width: 78px;
