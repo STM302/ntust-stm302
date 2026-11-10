@@ -17,6 +17,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 16px;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -2880,7 +2881,7 @@ body>.topbar,body>.site-header,body>footer {
   place-items: center;
   width: 96px;
   justify-self: center;
-  transform: translateX(30px);
+  transform: translateX(50px);
 }
 .header-lab-mark img {
   display: block;
@@ -2898,6 +2899,7 @@ body>.topbar,body>.site-header,body>footer {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
 
 .article-section {
@@ -3143,6 +3145,7 @@ body>.topbar,body>.site-header,body>footer {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   min-width: 38px;
   min-height: 25px;
   padding: 2px 9px;
@@ -3153,6 +3156,7 @@ body>.topbar,body>.site-header,body>footer {
   font-weight: 700;
   letter-spacing: .04em;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .language-switch:hover {
@@ -3184,7 +3188,20 @@ html[lang="en"] .lab-home-link {
 
 html[lang="en"] .site-header .nav-links {
   gap: 13px;
-  font-size: 15px;
+  font-size: 17px;
+}
+
+/* 桌機版導覽項目保持單行，避免中英文被壓成逐字直排。 */
+@media (min-width:951px) {
+  .site-header .nav-links > a,
+  .site-header .nav-members > a {
+    white-space: nowrap;
+  }
+
+  /* 中文版 Icon 留在原有網格欄位內置中，不再覆蓋導覽文字。 */
+  html[lang="zh-Hant"] .header-lab-mark {
+    transform: translateX(76px);
+  }
 }
 
 html[lang="en"] .hero-centered h1 {
@@ -3225,7 +3242,7 @@ html[lang="en"] .industry-guidance-grid li {
 
   html[lang="en"] .site-header .nav-links {
     gap: 9px;
-    font-size: 13px;
+    font-size: 15px;
   }
 }
 
@@ -3272,5 +3289,36 @@ html[lang="en"] .industry-guidance-grid li {
   html[lang="en"] .hero-centered h1 {
     font-size: 30px;
     line-height: 1.3;
+  }
+}
+/* 預設不換行，手機版維持單行 */
+.desktop-nav-break {
+  display: none;
+}
+
+/* 英文電腦版長選單 */
+@media (min-width: 951px) {
+  html[lang="en"] .desktop-nav-break {
+    display: block;
+  }
+
+  html[lang="en"] .nav-publications > a,
+  html[lang="en"] .nav-links > .nav-members:last-child > a {
+    display: inline-block;
+    line-height: 1.35;
+    text-align: left;
+
+    /* 預留底線空間，避免選取後位置跳動 */
+    border-bottom: 3px solid transparent;
+    text-decoration: none;
+  }
+  /* 滑鼠移入或目前所在頁面：只在整段文字底部畫一條線 */
+  html[lang="en"] .nav-publications > a:hover,
+  html[lang="en"] .nav-publications > a[aria-current="page"],
+  html[lang="en"] .nav-links > .nav-members:last-child > a:hover,
+  html[lang="en"] .nav-links > .nav-members:last-child > a[aria-current="page"] {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+    text-decoration: none;
   }
 }
