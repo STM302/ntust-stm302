@@ -1,6 +1,8 @@
 /* Google Sheets CSV 來源。只有讀取功能，不含帳號、API Key 或寫入權限。 */
 (() => {
   'use strict';
+  const isEnglish = document.documentElement.lang.toLowerCase().startsWith('en');
+  const siteRoot = isEnglish ? '../' : '';
   const schema = {
     'alumni-members': ['姓名','學位','論文題目','研究所','畢業年份','年份註記','顯示'],
     publications: ['文獻標題','年份','類別','作者','期刊或會議','補充資訊','索引','顯示'],
@@ -49,6 +51,10 @@
     check(new Set(header).size === header.length, '工作表有重複欄位名稱。');
     schema[kind].forEach(name => check(header.includes(name), `工作表缺少「${name}」欄位。`));
     const mapped = [];
+    const localized = (row, chineseName, englishName) =>
+      isEnglish && englishName && header.includes(englishName) && row[englishName]
+        ? row[englishName]
+        : row[chineseName];
     rows.forEach((values, i) => {
       if (values.every(v => !v.trim())) return;
       check(values.length <= header.length, `第 ${i+2} 列欄位數量錯誤。`);
@@ -62,11 +68,18 @@
         check(/^\d{4}$/.test(v) && +v >= 1900 && +v <= 2200, `第 ${i+2} 列「${name}」請填四位數年份；共同指導請填在年份註記。`);
         return +v;
       };
-      if (kind === 'alumni-members') mapped.push({name:row['姓名'],degree:row['學位'],thesis:row['論文題目'],institute:row['研究所'],graduation_year:year('畢業年份'),year_note:row['年份註記']});
+      if (kind === 'alumni-members') mapped.push({
+        name:localized(row,'姓名','英文姓名'),
+        degree:localized(row,'學位','英文学位'),
+        thesis:localized(row,'論文題目','英文論文題目'),
+        institute:localized(row,'研究所','英文研究所'),
+        graduation_year:year('畢業年份'),
+        year_note:localized(row,'年份註記','英文年份註記')
+      });
       if (kind === 'publications') mapped.push({
-        title:row['文獻標題'],year:year('年份'),type:row['類別'],
-        authors:row['作者'].split(/[;；\n]+/).map(v=>v.trim()).filter(Boolean),
-        venue:row['期刊或會議'],detail:row['補充資訊'],annual_index:row['索引']||'',
+        title:localized(row,'文獻標題','英文文獻標題'),year:year('年份'),type:localized(row,'類別','英文類別'),
+        authors:localized(row,'作者','英文作者').split(/[;；\n]+/).map(v=>v.trim()).filter(Boolean),
+        venue:localized(row,'期刊或會議','英文期刊或會議'),detail:localized(row,'補充資訊','英文補充資訊'),annual_index:row['索引']||'',
         url:row['文獻連結']||'',link_status:row['連結查核狀態']||'待查證',
         quartile:row['JCR分區']||'',category:row['學科分類']||'',
         grade_source:row['等級來源']||'',jcr_status:row['JCR查核狀態']||'待查證',
@@ -79,12 +92,15 @@
         check(/^[a-zA-Z0-9_-]+$/.test(row['編號']), `第 ${i+2} 列「編號」只能含英文字母、數字、-、_。`);
         check(!mapped.some(r=>r.id===row['編號']), `消息編號 ${row['編號']} 重複。`);
         check(!row['連結文字'] || Boolean(row['連結網址']), `第 ${i+2} 列有連結文字時，請一起填寫連結網址。`);
-        mapped.push({id:row['編號'],article_id:header.includes('文章編號')?(row['文章編號']||row['編號']):row['編號'],date:row['日期'],category:row['類別'],title:row['標題'],summary:header.includes('摘要')?row['摘要']:'',paragraphs:row['內文'].split(/\r?\n\s*\r?\n/).filter(Boolean),image:`assets/${row['編號']}.png`,image_auto:true,image_alt:row['圖片說明'],...(row['連結網址']?{link:{url:row['連結網址'],text:row['連結文字']||row['標題']}}:{})});
+        const title = localized(row,'標題','英文標題');
+        const paragraphs = localized(row,'內文','英文內文').split(/\r?\n\s*\r?\n/).filter(Boolean);
+        const linkText = localized(row,'連結文字','英文連結文字');
+        mapped.push({id:row['編號'],article_id:header.includes('文章編號')?(row['文章編號']||row['編號']):row['編號'],date:row['日期'],category:localized(row,'類別','英文類別'),title,summary:header.includes('摘要')?localized(row,'摘要','英文摘要'):'',paragraphs,image:`${siteRoot}assets/${row['編號']}.png`,image_auto:true,image_alt:localized(row,'圖片說明','英文圖片說明'),...(row['連結網址']?{link:{url:row['連結網址'],text:linkText||title}}:{})});
       }
       if (kind === 'news-articles') {
         check(/^[a-zA-Z0-9_-]+$/.test(row['編號']), `第 ${i+2} 列「編號」只能含英文字母、數字、-、_。`);
         check(!mapped.some(r=>r.id===row['編號']), `文章編號 ${row['編號']} 重複。`);
-        mapped.push({id:row['編號'],image:row['圖片檔名'],content:row['文章內容']});
+        mapped.push({id:row['編號'],image:row['圖片檔名'],content:localized(row,'文章內容','英文文章內容')});
       }
     });
     if (kind === 'publications') {
@@ -105,9 +121,43 @@
     return url.href;
   }
   function config() {
-    return configPromise ||= request('site-config.json','json',4000).catch(error => {
+    return configPromise ||= request(`${siteRoot}site-config.json`,'json',4000).catch(error => {
       console.warn('STM302 設定無法讀取，使用原有 JSON。',error); return {};
     });
+  }
+  function localizeJSON(data, kind) {
+    if (!isEnglish) return data;
+    if (kind === 'current-members' && data && Array.isArray(data.members)) return {
+      ...data,
+      members:data.members.map(row => ({
+        ...row,
+        photo:row.photo?.startsWith('assets/') ? `${siteRoot}${row.photo}` : row.photo
+      }))
+    };
+    if (!Array.isArray(data)) return data;
+    const choose = (row, field) => row[`${field}_en`] || row[field];
+    if (kind === 'alumni-members') return data.map(row => ({
+      ...row,
+      name:choose(row,'name'), degree:choose(row,'degree'), thesis:choose(row,'thesis'),
+      institute:choose(row,'institute'), year_note:choose(row,'year_note')
+    }));
+    if (kind === 'publications') return data.map(row => ({
+      ...row,
+      title:choose(row,'title'), type:choose(row,'type'), authors:row.authors_en || row.authors,
+      venue:choose(row,'venue'), detail:choose(row,'detail')
+    }));
+    if (['news','news-perspectives','news-media'].includes(kind)) return data.map(row => ({
+      ...row,
+      category:choose(row,'category'), title:choose(row,'title'), summary:choose(row,'summary'),
+      paragraphs:row.paragraphs_en || row.paragraphs,
+      image:row.image?.startsWith('assets/') ? `${siteRoot}${row.image}` : row.image,
+      image_alt:choose(row,'image_alt'),
+      link:row.link ? {...row.link,text:row.link.text_en || row.link.text} : row.link
+    }));
+    if (kind === 'news-articles') return data.map(row => ({
+      ...row, content:choose(row,'content'), image:row.image?.startsWith('assets/') ? `${siteRoot}${row.image}` : row.image
+    }));
+    return data;
   }
   async function load(root, render) {
     const kind=root.dataset.content;
@@ -125,7 +175,7 @@
         root.dataset.syncError=error.message;
       }
     }
-    await render(await request(root.dataset.source,'json',4000));
+    await render(localizeJSON(await request(root.dataset.source,'json',4000),kind));
     root.dataset.loadedFrom='json';
   }
   async function fetchKind(kind, fallbackSource) {
@@ -138,7 +188,7 @@
         console.warn(`STM302 ${kind} 試算表讀取失敗，使用 JSON 備份。`,error);
       }
     }
-    return fallbackSource ? request(fallbackSource,'json',4000) : [];
+    return fallbackSource ? localizeJSON(await request(fallbackSource,'json',4000),kind) : [];
   }
   function imageCandidates(path) {
     const url=new URL(path,window.location.href);
@@ -200,12 +250,20 @@
       return ['clarivate.com','www.clarivate.com','jcr.clarivate.com','jcr.help.clarivate.com','clarivate.libguides.com','journalcitationreports.zendesk.com'].includes(url.hostname);
     } catch { return false; }
   }
-  window.STM302Data={load,fetchKind,parse,publishedURL,imageCandidates,isDocumentPage,isNonPdfSource,documentPageURL};
+  window.STM302Data={load,fetchKind,parse,publishedURL,imageCandidates,isDocumentPage,isNonPdfSource,documentPageURL,isEnglish,siteRoot};
 })();
 
 /* 研究成果、畢業論文、消息優先讀取試算表，原 JSON 作為備份。 */
 (() => {
   'use strict';
+  const isEnglish = Boolean(window.STM302Data?.isEnglish);
+  const t = (chinese, english) => isEnglish ? english : chinese;
+  const groupLabel = value => ({
+    '研究室人員':'Lab Staff',
+    '博班':'Doctoral Students',
+    '碩二':"Second-year Master's Students",
+    '碩一':"First-year Master's Students"
+  }[value] || value);
   function setup(root) {
     const status = root.querySelector('.content-status');
     const list = document.getElementById(root.dataset.target || 'content-list');
@@ -228,26 +286,26 @@
       if (!value) return '';
       const url = new URL(value, window.location.href);
       const allowed = image ? ['http:', 'https:'] : ['http:', 'https:', 'mailto:'];
-      const localImage = image && window.location.protocol === 'file:' && url.protocol === 'file:' && url.href.startsWith(new URL('assets/', window.location.href).href);
+      const localImage = image && window.location.protocol === 'file:' && url.protocol === 'file:' && /\/assets\//.test(url.pathname);
       requireValue(allowed.includes(url.protocol) || localImage, '連結必須為 http、https 或電子郵件網址；離線圖片須位於 assets 資料夾。');
       return value;
     }
     function photo(path, name) {
       const placeholder = () => {
-        const node = element('div', 'member-photo-placeholder', '照片位置');
+        const node = element('div', 'member-photo-placeholder', t('照片位置','Photo'));
         node.setAttribute('role', 'img');
-        node.setAttribute('aria-label', `${name}的照片預留位置`);
+        node.setAttribute('aria-label', isEnglish ? `Photo placeholder for ${name}` : `${name}的照片預留位置`);
         return node;
       };
       const image = element('img', 'member-photo');
       const key = name.trim().split(/\s+/).at(-1);
       const paths = [
-        ...window.STM302Data.imageCandidates(`assets/member-${encodeURIComponent(key)}.png`),
+        ...window.STM302Data.imageCandidates(`${window.STM302Data.siteRoot}assets/member-${encodeURIComponent(key)}.png`),
         ...(path ? window.STM302Data.imageCandidates(safeURL(path, true)) : [])
       ];
       let next = 0;
       image.src = paths[next++];
-      image.alt = `${name}的照片`;
+      image.alt = isEnglish ? `Photo of ${name}` : `${name}的照片`;
       image.loading = 'lazy';
       image.addEventListener('error', () => {
         if (next < paths.length) image.src = paths[next++];
@@ -255,7 +313,7 @@
       });
       return image;
     }
-    const collator = new Intl.Collator('zh-Hant', { numeric: true });
+    const collator = new Intl.Collator(isEnglish ? 'en' : 'zh-Hant', { numeric: true });
     function orderedGroups(rows, getKey) {
       const groups = new Map();
       rows.forEach(row => {
@@ -288,8 +346,8 @@
       for (const entries of orderedGroups(sorted, row => row.year == null ? 'unknown' : `${row.year}|${row.type}`).values()) {
         const first = entries[0];
         const section = element('section', 'publication-type');
-        const typeLabel = first.type === '待核對項目' ? '其他研究成果' : first.type;
-        section.append(element('h2', 'publication-group-heading', first.year == null ? '年份未提供' : `${first.year} · ${typeLabel}`));
+        const typeLabel = first.type === '待核對項目' ? t('其他研究成果','Other Research Outputs') : first.type;
+        section.append(element('h2', 'publication-group-heading', first.year == null ? t('年份未提供','Year Not Provided') : `${first.year} · ${typeLabel}`));
         const ol = element('ol', 'publication-list');
         entries.forEach(row => {
           const li = element('li');
@@ -314,7 +372,7 @@
           }
           if (window.STM302Data.isDocumentPage(row.url)) {
             if (row.venue) venueLine.append(document.createTextNode(' '));
-            const link = element('a', 'publication-source', '連結');
+            const link = element('a', 'publication-source', t('連結','Link'));
             link.href = safeURL(window.STM302Data.documentPageURL(row.url));
             link.target = '_blank'; link.rel = 'noopener noreferrer';
             venueLine.append(link);
@@ -326,7 +384,7 @@
         section.append(ol);
         fragment.append(section);
       }
-      if (!rows.length) fragment.append(element('p', 'content-empty', '目前尚無研究成果。'));
+      if (!rows.length) fragment.append(element('p', 'content-empty', t('目前尚無研究成果。','No research outputs are currently available.')));
       list.replaceChildren(fragment);
     }
     function industryResults(rows) {
@@ -338,18 +396,20 @@
         requireValue(validYear(row.year), '產學成果 year 必須為年份數字或 null。');
         optionalStrings(row, ['partner', 'description'], '產學成果');
         const article = element('article', 'industry-guidance-card');
-        article.append(element('h4', '', row.title));
+        article.append(element('h4', '', isEnglish && row.title_en ? row.title_en : row.title));
         if (row.year != null) article.append(element('p', '', String(row.year)));
-        if (row.partner) article.append(element('p', '', row.partner));
-        if (row.description) {
+        const partner = isEnglish && row.partner_en ? row.partner_en : row.partner;
+        const description = isEnglish && row.description_en ? row.description_en : row.description;
+        if (partner) article.append(element('p', '', partner));
+        if (description) {
           const details = element('ul');
-          details.append(element('li', '', row.description));
+          details.append(element('li', '', description));
           article.append(details);
         }
         cards.append(article);
       });
       if (rows.length) fragment.append(cards);
-      if (!rows.length) fragment.append(element('p', 'content-empty', '目前尚無產學成果。'));
+      if (!rows.length) fragment.append(element('p', 'content-empty', t('目前尚無產學成果。','No industry collaboration projects are currently available.')));
       list.replaceChildren(fragment);
     }
     function currentMembers(data) {
@@ -369,20 +429,23 @@
         const entries = current.filter(row => row.group === group);
         if (!entries.length) return;
         const section = element('section', 'member-level');
-        section.append(element('h3', '', group));
+        section.append(element('h3', '', groupLabel(group)));
         const grid = element('div', 'member-card-grid');
         entries.forEach(row => {
           const card = element('article', 'member-card');
           const info = element('div', 'member-info');
-          info.append(element('h4', '', row.name));
-          if (row.motto) info.append(element('p', 'member-motto', row.motto));
-          card.append(photo(row.photo, row.name), info);
+          const name = isEnglish && row.name_en ? row.name_en : row.name;
+          // 中英文版共用同一個座右銘欄位，避免兩個版本顯示不同內容。
+          const motto = row.motto;
+          info.append(element('h4', '', name));
+          if (motto) info.append(element('p', 'member-motto', motto));
+          card.append(photo(row.photo, name), info);
           grid.append(card);
         });
         section.append(grid);
         currentFragment.append(section);
       });
-      if (!current.length) currentFragment.append(element('p', 'content-empty', '主要成員名單待補。'));
+      if (!current.length) currentFragment.append(element('p', 'content-empty', t('主要成員名單待補。','Current member information will be added soon.')));
       list.replaceChildren(currentFragment);
     }
     function alumniMembers(rows) {
@@ -400,13 +463,15 @@
         alumni.forEach(row => {
           const li = element('li');
           li.append(element('span', 'alumni-name', row.name));
-          const details = [row.thesis ? `${row.degree || ''}論文題目：${row.thesis}` : '', row.institute, `${row.graduation_year ?? '年份未提供'}${row.year_note ? `（${row.year_note}）` : ''}`].filter(value => value !== '' && value != null);
-          li.append(document.createTextNode(`，${details.join('，')}`));
+          const thesis = row.thesis ? (isEnglish ? `${row.degree || ''}${row.degree ? ' t' : 'T'}hesis: ${row.thesis}` : `${row.degree || ''}論文題目：${row.thesis}`) : '';
+          const year = `${row.graduation_year ?? t('年份未提供','Year Not Provided')}${row.year_note ? (isEnglish ? ` (${row.year_note})` : `（${row.year_note}）`) : ''}`;
+          const details = [thesis, row.institute, year].filter(value => value !== '' && value != null);
+          li.append(document.createTextNode(isEnglish ? `, ${details.join(', ')}` : `，${details.join('，')}`));
           ol.append(li);
         });
         alumniFragment.append(ol);
       }
-      if (!alumni.length) alumniFragment.append(element('p', 'alumni-placeholder', '畢業成員名單待補'));
+      if (!alumni.length) alumniFragment.append(element('p', 'alumni-placeholder', t('畢業成員名單待補','Alumni information will be added soon.')));
       list.replaceChildren(alumniFragment);
     }
     async function news(rows) {
@@ -424,7 +489,7 @@
           safeURL(row.link.url);
         }
       });
-      const articleRows = await window.STM302Data.fetchKind('news-articles','news-articles.json').catch(() => []);
+      const articleRows = await window.STM302Data.fetchKind('news-articles',`${window.STM302Data.siteRoot}news-articles.json`).catch(() => []);
       const articleIds = new Set(articleRows.map(row => row.id));
       const fragment = document.createDocumentFragment();
       [...rows].sort((a, b) => b.date.localeCompare(a.date)).forEach(row => {
@@ -464,7 +529,7 @@
         article.append(time, content);
         fragment.append(article);
       });
-      if (!rows.length) fragment.append(element('p', 'content-empty', root.dataset.content === 'news-perspectives' ? '目前尚無觀點資訊。' : root.dataset.content === 'news-media' ? '目前尚無媒體報導。' : '目前尚無最新消息。'));
+      if (!rows.length) fragment.append(element('p', 'content-empty', root.dataset.content === 'news-perspectives' ? t('目前尚無觀點資訊。','No insights are currently available.') : root.dataset.content === 'news-media' ? t('目前尚無媒體報導。','No media coverage is currently available.') : t('目前尚無最新消息。','No news is currently available.')));
       list.replaceChildren(fragment);
     }
     async function load() {
@@ -476,7 +541,7 @@
       } catch (error) {
         status.hidden = false;
         status.classList.add('content-error');
-        status.textContent = `內容無法載入：${error.message}`;
+        status.textContent = isEnglish ? `Unable to load content: ${error.message}` : `內容無法載入：${error.message}`;
       } finally {
         root.setAttribute('aria-busy', 'false');
       }

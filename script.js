@@ -1,7 +1,17 @@
 (() => {
   'use strict';
+  const isEnglish = document.documentElement.lang.toLowerCase().startsWith('en');
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
+
+  // 在中英文對應頁之間切換，並保留文章編號與目前分頁錨點。
+  const languageSwitch = document.querySelector('.language-switch');
+  if (languageSwitch) {
+    const target = new URL(languageSwitch.getAttribute('href'), window.location.href);
+    target.search = window.location.search;
+    target.hash = window.location.hash;
+    languageSwitch.href = target.href;
+  }
 
   const toggle = document.querySelector('.menu-toggle');
   const links = document.getElementById('navLinks');
@@ -9,12 +19,18 @@
   const dropdowns = Array.from(document.querySelectorAll('.nav-members')).map(nav => ({
     nav, button: nav.querySelector('.member-nav-toggle'),
     submenu: nav.querySelector('.member-submenu'), anchor: nav.querySelector('a'),
-    label: nav.classList.contains('nav-publications') ? '研究成果' : nav.classList.contains('nav-news') ? '最新消息' : '成員'
+    label: nav.classList.contains('nav-publications')
+      ? (isEnglish ? 'Research Outputs' : '研究成果')
+      : nav.classList.contains('nav-news')
+        ? (isEnglish ? 'News' : '最新消息')
+        : (isEnglish ? 'Members' : '成員')
   }));
   function setDropdownOpen(item, open) {
     item.nav.classList.toggle('submenu-open', open);
     item.button?.setAttribute('aria-expanded', String(open));
-    item.button?.setAttribute('aria-label', (open ? '收合' : '展開') + item.label + '選單');
+    item.button?.setAttribute('aria-label', isEnglish
+      ? `${open ? 'Collapse' : 'Expand'} ${item.label} menu`
+      : `${open ? '收合' : '展開'}${item.label}選單`);
   }
   function closeDropdowns(except) {
     dropdowns.forEach(item => { if (item !== except) setDropdownOpen(item, false); });
@@ -22,7 +38,9 @@
   function setMenuOpen(open) {
     links?.classList.toggle('open', open);
     toggle?.setAttribute('aria-expanded', String(open));
-    toggle?.setAttribute('aria-label', open ? '關閉導覽選單' : '開啟導覽選單');
+    toggle?.setAttribute('aria-label', isEnglish
+      ? (open ? 'Close navigation menu' : 'Open navigation menu')
+      : (open ? '關閉導覽選單' : '開啟導覽選單'));
     if (!open) closeDropdowns();
   }
   if (toggle && links) {
@@ -94,40 +112,26 @@
   const button = document.createElement('button');
   button.className = 'back-to-top';
   button.type = 'button';
-  button.setAttribute('aria-label', '回到頁首');
+  button.setAttribute('aria-label', isEnglish ? 'Back to top' : '回到頁首');
   button.innerHTML = `
     <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
       <path d="M5 15l7-7 7 7"></path>
     </svg>`;
-document.body.append(button);
-const syncBackToTop = () => {
-  const visible = window.scrollY > 320;
-  button.classList.toggle('is-visible', visible);
-  button.tabIndex = visible ? 0 : -1;
-};
-let backToTopTicking = false;
-const requestBackToTopSync = () => {
-  if (backToTopTicking) return;
-  backToTopTicking = true;
-  window.requestAnimationFrame(() => {
-    syncBackToTop();
-    backToTopTicking = false;
+
+  const syncBackToTop = () => {
+    const visible = window.scrollY > 320;
+    button.classList.toggle('is-visible', visible);
+    button.tabIndex = visible ? 0 : -1;
+  };
+
+  button.addEventListener('click', () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    button.blur();
   });
-};
-button.addEventListener('click', () => {
-  const reduceMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
-  window.scrollTo({
-    top: 0,
-    behavior: reduceMotion ? 'auto' : 'smooth'
-  });
-  button.blur();
-});
-window.addEventListener('scroll', requestBackToTopSync, {
-  passive: true
-});
-requestBackToTopSync();
+  window.addEventListener('scroll', syncBackToTop, { passive: true });
+  syncBackToTop();
+  document.body.append(button);
 
   // 原本 HTML 的 assets 圖片保持相同檔名；副檔名更換時自動嘗試其他格式。
   const refreshAssetImages = () => {

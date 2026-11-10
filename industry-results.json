@@ -1,26 +1,38 @@
 [
   {
     "title": "產品碳足跡與生命週期評估",
-    "description": "產品碳足跡盤查(ISO 14067)、碳標籤、環境部 PCR 申請、生命週期評估（LCA）與計算服務。"
+    "title_en": "Product Carbon Footprint and Life Cycle Assessment",
+    "description": "產品碳足跡盤查(ISO 14067)、碳標籤、環境部 PCR 申請、生命週期評估（LCA）與計算服務。",
+    "description_en": "Product carbon footprint inventories (ISO 14067), carbon labels, Environmental Protection Administration PCR applications, life cycle assessment (LCA), and calculation services."
   },
   {
     "title": "組織型溫室氣體盤查與範疇三",
-    "description": "企業組織型溫室氣體盤查（GHG protocol，ISO 14064-1相關標準）與建置輔導。"
+    "title_en": "Organizational Greenhouse Gas Inventory and Scope 3",
+    "description": "企業組織型溫室氣體盤查（GHG protocol，ISO 14064-1相關標準）與建置輔導。",
+    "description_en": "Consulting on organizational greenhouse gas inventories based on the GHG Protocol and ISO 14064-1-related standards."
   },
   {
     "title": "供應鏈減碳 (範疇3)與 SBTi 目標輔導",
-    "description": "科學基礎減量目標（SBTi）、供應鏈低碳化升級轉型、供應鏈減碳。"
+    "title_en": "Supply Chain Decarbonization (Scope 3) and SBTi Target Consulting",
+    "description": "科學基礎減量目標（SBTi）、供應鏈低碳化升級轉型、供應鏈減碳。",
+    "description_en": "Science Based Targets initiative (SBTi), low-carbon supply chain transformation, and supply chain decarbonization."
   },
   {
     "title": "循環經濟與生物質資源利用",
-    "description": "循環經濟商業模式評估、減碳效益評析、循環包裝減碳研究"
+    "title_en": "Circular Economy and Biomass Resource Utilization",
+    "description": "循環經濟商業模式評估、減碳效益評析、循環包裝減碳研究",
+    "description_en": "Circular economy business model evaluation, carbon reduction benefit assessment, and research on low-carbon circular packaging."
   },
   {
     "title": "ESG 策略規劃、永續報告與政策調查",
-    "description": "ESG 永續發展策略、永續報告書精進、供應鏈永續風險評估"
+    "title_en": "ESG Strategy, Sustainability Reporting, and Policy Research",
+    "description": "ESG 永續發展策略、永續報告書精進、供應鏈永續風險評估",
+    "description_en": "ESG and sustainable development strategies, sustainability report improvement, and supply chain sustainability risk assessment."
   },
   {
     "title": "教育訓練、實戰工作坊與培訓",
-    "description": "永續與溫室氣體盤查知識培訓"
+    "title_en": "Education, Hands-on Workshops, and Professional Training",
+    "description": "永續與溫室氣體盤查知識培訓",
+    "description_en": "Training in sustainability and greenhouse gas inventory practices."
   }
 ]

@@ -1,5 +1,7 @@
 (() => {
   'use strict';
+  const isEnglish = document.documentElement.lang.toLowerCase().startsWith('en');
+  const siteRoot = isEnglish ? '../' : '';
   const status = document.getElementById('article-status');
   const detail = document.getElementById('article-detail');
   if (!status || !detail || !window.STM302Data) return;
@@ -16,8 +18,9 @@
   };
   const imagePath = value => {
     if (!value) return '';
-    if (/^(?:https?:)?\/\//i.test(value) || value.startsWith('assets/')) return value;
-    return `assets/${value}`;
+    if (/^(?:https?:)?\/\//i.test(value) || value.startsWith('../assets/')) return value;
+    if (value.startsWith('assets/')) return `${siteRoot}${value}`;
+    return `${siteRoot}assets/${value}`;
   };
   const renderBody = raw => {
     const body = document.getElementById('article-body');
@@ -47,7 +50,7 @@
     if (!fragment.childNodes.length) {
       const empty = document.createElement('p');
       empty.className = 'content-empty';
-      empty.textContent = '此文章尚未填寫內容。';
+      empty.textContent = isEnglish ? 'This article has not been completed yet.' : '此文章尚未填寫內容。';
       fragment.append(empty);
     }
     body.replaceChildren(fragment);
@@ -71,26 +74,40 @@
   async function load() {
     try {
       const id = new URLSearchParams(window.location.search).get('id')?.trim();
-      if (!id) throw new Error('網址缺少文章編號。');
+      if (!id) throw new Error(isEnglish ? 'The article ID is missing from the URL.' : '網址缺少文章編號。');
       const [perspectives, media, articles] = await Promise.all([
-        window.STM302Data.fetchKind('news-perspectives','news-perspectives.json'),
-        window.STM302Data.fetchKind('news-media','news-media.json'),
-        window.STM302Data.fetchKind('news-articles','news-articles.json').catch(() => [])
+        window.STM302Data.fetchKind('news-perspectives',`${siteRoot}news-perspectives.json`),
+        window.STM302Data.fetchKind('news-media',`${siteRoot}news-media.json`),
+        window.STM302Data.fetchKind('news-articles',`${siteRoot}news-articles.json`).catch(() => [])
       ]);
       const perspective = perspectives.find(row => row.id === id || row.article_id === id);
       const mediaRow = media.find(row => row.id === id || row.article_id === id);
       const row = perspective || mediaRow;
-      if (!row) throw new Error('找不到這篇文章，可能已下架或編號已變更。');
+      if (!row) throw new Error(isEnglish ? 'This article could not be found. It may have been removed or renumbered.' : '找不到這篇文章，可能已下架或編號已變更。');
       const article = articles.find(item => item.id === (row.article_id || row.id));
+      const articleId = row.article_id || row.id;
+      const siteBase = new URL(siteRoot || './', window.location.href);
+      const chineseURL = new URL(`article.html?id=${encodeURIComponent(articleId)}`, siteBase);
+      const englishURL = new URL(`en/article.html?id=${encodeURIComponent(articleId)}`, siteBase);
+      const canonical = document.querySelector('link[rel="canonical"]');
+      if (canonical) canonical.href = isEnglish ? englishURL.href : chineseURL.href;
+      document.querySelectorAll('link[rel="alternate"]').forEach(link => {
+        if (link.hreflang === 'en') link.href = englishURL.href;
+        else link.href = chineseURL.href;
+      });
       text('article-category', row.category);
       text('article-date', row.date.replaceAll('-', '.'));
       const time = document.getElementById('article-date');
       if (time) time.dateTime = row.date;
       text('article-title', row.title);
-      document.title = `${row.title}｜STM302 永續科技管理研究室`;
+      document.title = isEnglish
+        ? `${row.title} | STM302 Sustainable Technology Management`
+        : `${row.title}｜STM302 永續科技管理研究室`;
       const back = document.getElementById('article-back');
       back.href = perspective ? 'news.html' : 'news-media.html';
-      back.textContent = perspective ? '← 返回觀點資訊' : '← 返回媒體報導';
+      back.textContent = isEnglish
+        ? (perspective ? '← Back to Insights' : '← Back to Media Coverage')
+        : (perspective ? '← 返回觀點資訊' : '← 返回媒體報導');
       renderBody(article?.content || row.paragraphs.join('\n\n'));
       loadImage(article?.image || row.image, row.image_alt || row.title);
       status.hidden = true;
@@ -98,7 +115,7 @@
     } catch (error) {
       status.hidden = false;
       status.classList.add('content-error');
-      status.textContent = `文章無法載入：${error.message}`;
+      status.textContent = isEnglish ? `Unable to load article: ${error.message}` : `文章無法載入：${error.message}`;
     }
   }
   load();
