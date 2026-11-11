@@ -3296,6 +3296,15 @@ html[lang="en"] .industry-guidance-grid li {
   display: none;
 }
 
+/* 英文手機選單允許長標題在單字之間換行，不得擠入相鄰欄位。 */
+@media (max-width: 950px) {
+  html[lang="en"] .nav-links.open > .nav-members > a {
+    min-width: 0;
+    white-space: normal;
+    line-height: 1.35;
+  }
+}
+
 /* 英文電腦版長選單 */
 @media (min-width: 951px) {
   html[lang="en"] .desktop-nav-break {

@@ -4,13 +4,20 @@
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
-  // 在中英文對應頁之間切換，並保留文章編號與目前分頁錨點。
+  // 在中英文對應頁之間切換，並隨時保留文章編號與目前分頁錨點。
   const languageSwitch = document.querySelector('.language-switch');
   if (languageSwitch) {
-    const target = new URL(languageSwitch.getAttribute('href'), window.location.href);
-    target.search = window.location.search;
-    target.hash = window.location.hash;
-    languageSwitch.href = target.href;
+    const languageTarget = languageSwitch.getAttribute('href');
+    const syncLanguageSwitch = () => {
+      const target = new URL(languageTarget, window.location.href);
+      target.search = window.location.search;
+      target.hash = window.location.hash;
+      languageSwitch.href = target.href;
+    };
+
+    syncLanguageSwitch();
+    window.addEventListener('hashchange', syncLanguageSwitch);
+    languageSwitch.addEventListener('click', syncLanguageSwitch);
   }
 
   const toggle = document.querySelector('.menu-toggle');
@@ -20,7 +27,7 @@
     nav, button: nav.querySelector('.member-nav-toggle'),
     submenu: nav.querySelector('.member-submenu'), anchor: nav.querySelector('a'),
     label: nav.classList.contains('nav-publications')
-      ? (isEnglish ? 'Research Outputs' : '研究成果')
+      ? (isEnglish ? 'Research Achievements' : '研究成果')
       : nav.classList.contains('nav-news')
         ? (isEnglish ? 'News' : '最新消息')
         : (isEnglish ? 'Members' : '成員')
